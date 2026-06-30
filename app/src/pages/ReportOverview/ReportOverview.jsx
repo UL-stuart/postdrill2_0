@@ -3,6 +3,7 @@ import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import SessionMeta from './SessionMeta.jsx'
 import LookingAhead from './LookingAhead.jsx'
+import MarkersSummary from './MarkersSummary.jsx'
 import styles from './ReportOverview.module.css'
 
 export default function ReportOverview({ session, onNavigate }) {
@@ -18,6 +19,7 @@ export default function ReportOverview({ session, onNavigate }) {
         <p className={styles.pageSubtitle}>Snipe Hunt</p>
       </header>
       <SessionMeta session={session} meta={data.meta} />
+      <MarkersSummary markers={data.markers.markers} onNavigateToDetail={() => onNavigate('markers')} />
       <LookingAhead text={data.finalReport.lookingAhead} />
     </main>
   )

@@ -1,0 +1,24 @@
+.root { padding: 32px 0 64px; }
+.pageTitle { font-size: 1.6rem; font-weight: 700; margin-bottom: 32px; }
+
+.categorySection { margin-bottom: 40px; }
+.categoryHeader { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 2px solid var(--color-border); margin-bottom: 16px; }
+.categoryName { font-size: 1.1rem; font-weight: 700; }
+.categoryAvg { font-size: 0.9rem; color: var(--color-text-muted); }
+
+.markerCard { margin-bottom: 16px; }
+.markerHeader { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--color-border); }
+.markerId { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); display: block; }
+.markerName { font-size: 1rem; font-weight: 700; margin-top: 2px; }
+.markerRating { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.ratingLabel { font-size: 0.85rem; color: var(--color-text-muted); }
+
+.fieldLabel { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); margin-bottom: 6px; margin-top: 14px; }
+.evidence { border-left: 3px solid var(--color-accent); padding: 10px 16px; background: #f8faff; border-radius: 0 4px 4px 0; font-style: italic; color: var(--color-text-muted); font-size: 0.9rem; line-height: 1.6; }
+.rationale p { margin-bottom: 10px; line-height: 1.7; }
+.rationale p:last-child { margin-bottom: 0; }
+
+.summarySection, .caveatsSection { margin-top: 20px; }
+.summaryHeading { font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
+.summaryTable { font-size: 0.85rem; overflow-x: auto; white-space: pre; }
+.caveatsBody p { margin-bottom: 8px; font-size: 0.9rem; }

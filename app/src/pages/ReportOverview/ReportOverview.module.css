@@ -17,3 +17,10 @@
 .detailLink:hover { text-decoration: underline; }
 .lookingAheadBody p { margin-bottom: 14px; line-height: 1.75; }
 .lookingAheadBody p:last-child { margin-bottom: 0; }
+
+.categoryList { display: flex; flex-direction: column; gap: 16px; }
+.categoryRow { padding: 16px; background: var(--color-bg); border-radius: 6px; }
+.categoryHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.categoryName { font-weight: 700; }
+.categoryAvg { font-size: 0.85rem; color: var(--color-text-muted); }
+.categorySummary { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.6; }
