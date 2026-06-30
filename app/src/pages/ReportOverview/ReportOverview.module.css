@@ -44,3 +44,4 @@
 .timelineContent { display: flex; flex-direction: column; gap: 2px; }
 .timelineLabel { font-size: 0.9rem; font-weight: 600; text-transform: capitalize; }
 .timelineTs { font-size: 0.8rem; color: var(--color-text-muted); }
+.timelineCard {}
