@@ -19,7 +19,7 @@ export default function ReportOverview({ session, onNavigate }) {
         <p className={styles.pageSubtitle}>Snipe Hunt</p>
       </header>
       <SessionMeta session={session} meta={data.meta} />
-      <MarkersSummary markers={data.markers.markers} onNavigateToDetail={() => onNavigate('markers')} />
+      <MarkersSummary markers={data.markersReport.markers} onNavigateToDetail={() => onNavigate('markers')} />
       <LookingAhead text={data.finalReport.lookingAhead} />
     </main>
   )

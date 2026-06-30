@@ -34,7 +34,7 @@ export function useSessionData(sessionId, playerName) {
       const transcript = parseTranscript(transcriptText)
       const meta = computeSessionMeta(transcript, sessionStates)
       const markers = parseMarkersFile(markersText)
-      return { finalReport, sessionStates, transcript, meta, markers }
+      return { finalReport, sessionStates, transcript, meta, markersReport: markers }
     }
 
     load()

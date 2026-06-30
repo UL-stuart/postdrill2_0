@@ -63,13 +63,13 @@ describe('parseMarkersFile', () => {
     expect(() => parseMarkersFile(SAMPLE.replace('**Rating:** 3', '**Rating:** 5'))).toThrow(/out of range/)
   })
   it('parses correctly when headings use en-dash (–)', () => {
-    const { markers } = parseMarkersFile(SAMPLE.replace('—', '–'))
+    const { markers } = parseMarkersFile(SAMPLE.replace(/—/g, '–'))
     expect(markers).toHaveLength(2)
     expect(markers[0].id).toBe('L3')
     expect(markers[0].name).toBe('Takes explicit ownership')
   })
   it('parses correctly when headings use hyphen (-)', () => {
-    const { markers } = parseMarkersFile(SAMPLE.replace('—', '-'))
+    const { markers } = parseMarkersFile(SAMPLE.replace(/—/g, '-'))
     expect(markers).toHaveLength(2)
     expect(markers[0].id).toBe('L3')
     expect(markers[0].name).toBe('Takes explicit ownership')

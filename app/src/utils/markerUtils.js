@@ -26,3 +26,5 @@ export function synthesizeCategorySummary(markers) {
     .map(m => extractFirstSentence(m.rationale))
     .join(' ')
 }
+
+export const CATEGORY_ORDER = ['Leadership', 'Coordination', 'Mindset', 'Communication']

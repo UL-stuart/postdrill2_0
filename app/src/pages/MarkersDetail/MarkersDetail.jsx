@@ -1,12 +1,10 @@
 import { useSessionData } from '../../hooks/useSessionData.js'
-import { groupMarkersByCategory } from '../../utils/markerUtils.js'
+import { groupMarkersByCategory, CATEGORY_ORDER } from '../../utils/markerUtils.js'
 import { computeAverage, formatAverageLabel, formatRatingLabel } from '../../utils/ratingUtils.js'
 import RatingBadge from '../../components/RatingBadge.jsx'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import styles from './MarkersDetail.module.css'
-
-const CATEGORY_ORDER = ['Leadership', 'Coordination', 'Mindset', 'Communication']
 
 function stripBlockquote(text) {
   return text.split('\n').map(l => l.replace(/^>\s*/, '')).join('\n').trim()
@@ -18,7 +16,7 @@ export default function MarkersDetail({ session }) {
   if (loading) return <LoadingSpinner />
   if (error) return <ErrorState message={error} />
 
-  const groups = groupMarkersByCategory(data.markers.markers)
+  const groups = groupMarkersByCategory(data.markersReport.markers)
 
   return (
     <main className={`container ${styles.root}`}>
@@ -59,18 +57,18 @@ export default function MarkersDetail({ session }) {
         )
       })}
 
-      {data.markers.scoreSummary && (
+      {data.markersReport.scoreSummary && (
         <section className={`card ${styles.summarySection}`}>
           <h2 className={styles.summaryHeading}>Score Summary</h2>
-          <pre className={styles.summaryTable}>{data.markers.scoreSummary}</pre>
+          <pre className={styles.summaryTable}>{data.markersReport.scoreSummary}</pre>
         </section>
       )}
 
-      {data.markers.caveats && (
+      {data.markersReport.caveats && (
         <section className={`card ${styles.caveatsSection}`}>
           <h2 className={styles.summaryHeading}>Caveats</h2>
           <div className={styles.caveatsBody}>
-            {data.markers.caveats.split('\n').map((line, i) => <p key={i}>{line}</p>)}
+            {data.markersReport.caveats.split('\n').map((line, i) => <p key={i}>{line}</p>)}
           </div>
         </section>
       )}
