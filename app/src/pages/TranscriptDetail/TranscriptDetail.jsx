@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSessionData } from '../../hooks/useSessionData.js'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
@@ -9,6 +9,8 @@ import styles from './TranscriptDetail.module.css'
 export default function TranscriptDetail({ session }) {
   const { data, error, loading } = useSessionData(session.sessionId, session.playerName)
   const [highlightedIndex, setHighlightedIndex] = useState(null)
+
+  useEffect(() => { document.title = `${session.playerName} — Post-Drill Report` }, [session.playerName])
 
   if (loading) return <LoadingSpinner />
   if (error) return <ErrorState message={error} />

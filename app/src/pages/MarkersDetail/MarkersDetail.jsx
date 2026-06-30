@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSessionData } from '../../hooks/useSessionData.js'
 import { groupMarkersByCategory, CATEGORY_ORDER } from '../../utils/markerUtils.js'
 import { computeAverage, formatAverageLabel, formatRatingLabel } from '../../utils/ratingUtils.js'
@@ -9,6 +10,8 @@ import styles from './MarkersDetail.module.css'
 
 export default function MarkersDetail({ session }) {
   const { data, error, loading } = useSessionData(session.sessionId, session.playerName)
+
+  useEffect(() => { document.title = `${session.playerName} — Post-Drill Report` }, [session.playerName])
 
   if (loading) return <LoadingSpinner />
   if (error) return <ErrorState message={error} />

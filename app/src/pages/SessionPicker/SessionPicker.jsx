@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSessionList } from '../../hooks/useSessionList.js'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
@@ -8,6 +9,7 @@ function toTitleCase(str) {
 }
 
 export default function SessionPicker({ onSelectSession }) {
+  useEffect(() => { document.title = 'Post-Drill Reports — Uptime Labs' }, [])
   const { sessions, error, loading } = useSessionList()
 
   if (loading) return <LoadingSpinner label="Loading sessions…" />

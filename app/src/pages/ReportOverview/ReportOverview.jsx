@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSessionData } from '../../hooks/useSessionData.js'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
@@ -10,6 +11,8 @@ import styles from './ReportOverview.module.css'
 
 export default function ReportOverview({ session, onNavigate }) {
   const { data, error, loading } = useSessionData(session.sessionId, session.playerName)
+
+  useEffect(() => { document.title = `${session.playerName} — Post-Drill Report` }, [session.playerName])
 
   if (loading) return <LoadingSpinner label={`Loading session ${session.sessionId}…`} />
   if (error) return <ErrorState message={error} />

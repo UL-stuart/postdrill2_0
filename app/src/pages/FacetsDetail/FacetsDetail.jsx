@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSessionData } from '../../hooks/useSessionData.js'
 import { computeAverage, formatAverageLabel, formatRatingLabel } from '../../utils/ratingUtils.js'
 import { stripBlockquote } from '../../utils/markdownUtils.js'
@@ -8,6 +9,8 @@ import styles from './FacetsDetail.module.css'
 
 export default function FacetsDetail({ session }) {
   const { data, error, loading } = useSessionData(session.sessionId, session.playerName)
+
+  useEffect(() => { document.title = `${session.playerName} — Post-Drill Report` }, [session.playerName])
 
   if (loading) return <LoadingSpinner />
   if (error) return <ErrorState message={error} />
