@@ -58,5 +58,5 @@ function uplabsDataPlugin() {
 
 export default defineConfig({
   plugins: [react(), uplabsDataPlugin()],
-  test: { environment: 'node', globals: true }
+  test: { environment: 'node', globals: true, env: { TZ: 'UTC' } }
 })
