@@ -2,6 +2,7 @@ import { useSessionData } from '../../hooks/useSessionData.js'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import SessionMeta from './SessionMeta.jsx'
+import Timeline from './Timeline.jsx'
 import LookingAhead from './LookingAhead.jsx'
 import MarkersSummary from './MarkersSummary.jsx'
 import FacetsSummary from './FacetsSummary.jsx'
@@ -20,6 +21,7 @@ export default function ReportOverview({ session, onNavigate }) {
         <p className={styles.pageSubtitle}>Snipe Hunt</p>
       </header>
       <SessionMeta session={session} meta={data.meta} />
+      <Timeline sessionStates={data.sessionStates} />
       <MarkersSummary markers={data.markersReport.markers} onNavigateToDetail={() => onNavigate('markers')} />
       <FacetsSummary facets={data.facetsReport.facets} onNavigateToDetail={() => onNavigate('facets')} />
       <LookingAhead text={data.finalReport.lookingAhead} />
