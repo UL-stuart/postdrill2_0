@@ -40,7 +40,8 @@ function uplabsDataPlugin() {
 
       server.middlewares.use('/data', (req, res, next) => {
         if (req.method !== 'GET') return next()
-        const filePath = path.resolve(DATA_ROOT, decodeURIComponent(req.url).replace(/^\//, ''))
+        const relPath = decodeURIComponent(req.url).replace(/^\/data\//, '').replace(/^\//, '')
+        const filePath = path.resolve(DATA_ROOT, relPath)
         if (!filePath.startsWith(DATA_ROOT)) { res.statusCode = 403; res.end('Forbidden'); return }
         try {
           const content = fs.readFileSync(filePath, 'utf8')
