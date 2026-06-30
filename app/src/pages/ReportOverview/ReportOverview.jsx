@@ -1,0 +1,24 @@
+import { useSessionData } from '../../hooks/useSessionData.js'
+import LoadingSpinner from '../../components/LoadingSpinner.jsx'
+import ErrorState from '../../components/ErrorState.jsx'
+import SessionMeta from './SessionMeta.jsx'
+import LookingAhead from './LookingAhead.jsx'
+import styles from './ReportOverview.module.css'
+
+export default function ReportOverview({ session, onNavigate }) {
+  const { data, error, loading } = useSessionData(session.sessionId, session.playerName)
+
+  if (loading) return <LoadingSpinner label={`Loading session ${session.sessionId}…`} />
+  if (error) return <ErrorState message={error} />
+
+  return (
+    <main className={`container ${styles.root}`}>
+      <header className={styles.pageHeader}>
+        <h1 className={styles.pageTitle}>Post-Drill Report</h1>
+        <p className={styles.pageSubtitle}>Snipe Hunt</p>
+      </header>
+      <SessionMeta session={session} meta={data.meta} />
+      <LookingAhead text={data.finalReport.lookingAhead} />
+    </main>
+  )
+}
