@@ -15,6 +15,28 @@ describe('extractFirstSentence', () => {
     expect(extractFirstSentence('No period\nSecond line')).toBe('No period')
   })
 })
+describe('groupMarkersByCategory', () => {
+  const markers = [
+    { id: 'L3', rating: 3, rationale: 'foo', evidence: '', name: 'X' },
+    { id: 'C1', rating: 2, rationale: 'bar', evidence: '', name: 'Y' },
+    { id: 'L5', rating: 4, rationale: 'baz', evidence: '', name: 'Z' },
+  ]
+  it('groups markers by their category prefix', () => {
+    const groups = groupMarkersByCategory(markers)
+    expect(groups).toHaveProperty('Leadership')
+    expect(groups).toHaveProperty('Coordination')
+  })
+  it('returns each group as an array', () => {
+    const groups = groupMarkersByCategory(markers)
+    expect(Array.isArray(groups.Leadership)).toBe(true)
+    expect(Array.isArray(groups.Coordination)).toBe(true)
+  })
+  it('places multiple markers with the same prefix in the same array', () => {
+    const groups = groupMarkersByCategory(markers)
+    expect(groups.Leadership).toHaveLength(2)
+    expect(groups.Coordination).toHaveLength(1)
+  })
+})
 describe('synthesizeCategorySummary', () => {
   const markers = [
     { id: 'C1', rating: 3, rationale: 'They asked good questions. Follow-up was limited.' },
