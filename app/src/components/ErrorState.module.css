@@ -1,0 +1,4 @@
+.root { background: #fef2f2; border: 1px solid #fca5a5; border-radius: var(--radius); padding: 32px 24px; text-align: center; margin: 40px auto; max-width: 560px; }
+.icon { font-size: 2rem; color: #ef4444; font-weight: 700; margin-bottom: 12px; }
+.heading { font-size: 1.1rem; color: #b91c1c; margin-bottom: 8px; }
+.message { color: #6b7280; font-size: 0.9rem; white-space: pre-wrap; }
