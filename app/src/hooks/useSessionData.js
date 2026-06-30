@@ -3,6 +3,7 @@ import { parseFinalReport } from '../parsers/parseFinalReport.js'
 import { parseSessionStates } from '../parsers/parseSessionStates.js'
 import { parseTranscript } from '../parsers/parseTranscript.js'
 import { parseMarkersFile } from '../parsers/parseMarkersFile.js'
+import { parseFacetsFile } from '../parsers/parseFacetsFile.js'
 import { computeSessionMeta } from '../utils/sessionMeta.js'
 
 const fetchText = async (url) => {
@@ -23,18 +24,20 @@ export function useSessionData(sessionId, playerName) {
     setLoading(true); setError(null); setData(null)
 
     const load = async () => {
-      const [finalReportText, statesText, transcriptText, markersText] = await Promise.all([
+      const [finalReportText, statesText, transcriptText, markersText, facetsText] = await Promise.all([
         fetchText(`/data/readouts/${sessionId}/${sessionId}-final-report.md`),
         fetchText(`/data/session_states/session_states.csv`),
         fetchText(`/data/transcripts/${playerName}-${sessionId}.csv`),
         fetchText(`/data/readouts/${sessionId}/${sessionId}-markers.md`),
+        fetchText(`/data/readouts/${sessionId}/${sessionId}-facets.md`),
       ])
       const finalReport = parseFinalReport(finalReportText)
       const sessionStates = parseSessionStates(statesText, sessionId)
       const transcript = parseTranscript(transcriptText)
       const meta = computeSessionMeta(transcript, sessionStates)
-      const markers = parseMarkersFile(markersText)
-      return { finalReport, sessionStates, transcript, meta, markersReport: markers }
+      const markersReport = parseMarkersFile(markersText)
+      const facetsReport = parseFacetsFile(facetsText)
+      return { finalReport, sessionStates, transcript, meta, markersReport, facetsReport }
     }
 
     load()
