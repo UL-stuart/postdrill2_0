@@ -1,0 +1,366 @@
+datetime,player,channel,message
+2026-06-12 09:06:20,uptimelabs,online-boutique-9445,":warning: :warning::warning: Warning :warning::warning: :warning:
+
+
+
+ You are about to face the 'Snipe Hunt'.
+
+
+
+ Are you prepared for the challenge? "
+2026-06-12 09:06:31,uptimelabs,online-boutique-9445,"*Access game links by pressing the drill links button by the side of timer*
+ *Use `/incident` to create an incident record*
+
+Once you're ready just click start to begin"
+2026-06-12 09:07:55,bez,online-boutique-9445,Excited for today's tech summit fireside - I'll be joining later
+2026-06-12 09:07:58,tinus,online-boutique-9445,"Looking forward to it - got a few good stories lined up, should be a good one."
+2026-06-12 09:08:03,shay,online-boutique-9445,"Good luck you two, go smash it!"
+2026-06-12 09:08:09,bob,online-boutique-9445,"Something's not right - I'm getting slammed with complaints, something is seriously wrong."
+2026-06-12 09:08:29,PLAYER,online-boutique-9445,what's wrong @bob ?
+2026-06-12 09:08:36,PLAYER,online-boutique-9445,can you please elborate?
+2026-06-12 09:08:43,bob,online-boutique-9445,"Checkout is failing everywhere. Customers can't finish their orders, they're getting stuck at the last step."
+2026-06-12 09:08:49,bob,online-boutique-9445,"It's not just one region. We're seeing complaints from the UK, US, and other places too."
+2026-06-12 09:08:54,bob,online-boutique-9445,"The pattern is the same: everything works until the final checkout step, then it just hangs or times out."
+2026-06-12 09:09:00,bob,online-boutique-9445,Ticket queue is exploding. We've had 34 new tickets in the last five minutes and it's still climbing.
+2026-06-12 09:09:08,shay,online-boutique-9445,"hey — not trying to distract from this, but tanya kicked off the email maintenance right before the complaints started. probably nothing, but the timing is a bit close."
+2026-06-12 09:09:16,bob,online-boutique-9445,"First ticket came in about 20 minutes ago. Since then, zero successful transactions. We're losing around £1,000 to £1,500 every minute."
+2026-06-12 09:09:27,shay,online-boutique-9445,I keep coming back to the email maintenance — DNS changes went live just before this all kicked off. zero successful transactions since then. that's not nothing.
+2026-06-12 09:09:29,PLAYER,online-boutique-9445,I'm checking the websote now
+2026-06-12 09:09:43,bob,online-boutique-9445,"Let me know if you see anything different on your end. From what I can tell, customers still can't check out."
+2026-06-12 09:09:49,shay,online-boutique-9445,"if you want, I can pull up the recent change records. just say the word."
+2026-06-12 09:09:59,PLAYER,online-boutique-9445,"Yes, I'm getting this error"
+2026-06-12 09:10:02,PLAYER,online-boutique-9445,ˇ
+2026-06-12 09:10:04,PLAYER,online-boutique-9445,"Unexpected Error
+An unexpected error has occurred. Please contact the team.
+
+"
+2026-06-12 09:10:08,bob,online-boutique-9445,Thanks for confirming. I need to tell clients this is being worked on. Can I say we're on it?
+2026-06-12 09:10:14,shay,online-boutique-9445,email maintenance timing still feels off — DNS flipped right before this. just flagging it again.
+2026-06-12 09:10:27,bob,online-boutique-9445,"That's what customers are seeing too. Error pops up right at checkout, nothing gets processed."
+2026-06-12 09:10:34,shay,online-boutique-9445,email maintenance DNS change happened right before this started. still think it's worth a look.
+2026-06-12 09:10:57,PLAYER,online-boutique-9445,Cool
+2026-06-12 09:11:10,PLAYER,online-boutique-9445,Yes @bob go ahead with that messsage
+2026-06-12 09:11:15,bob,online-boutique-9445,"Got it, just to check, do you want Shay or Daniel to put up a maintenance banner on the site for this?"
+2026-06-12 09:11:25,PLAYER,online-boutique-9445,@shay can you please rovide me the recent changes that went to PROD?
+2026-06-12 09:11:35,shay,online-boutique-9445,"hang on, pulling it up now
+CheckoutService — 08:42 UTC (28 mins ago)
+Shipping Service — 08:52 UTC (18 mins ago)
+ProductCatalogueService — 08:47 UTC (23 mins ago)
+CartService — 06:07 UTC (3h 3m ago)
+AdService — 05:07 UTC (4h 3m ago)
+CheckoutService — 03:07 UTC (6h 3m ago)
+Want me to walk through any of these in detail?"
+2026-06-12 09:11:52,shay,online-boutique-9445,"also, none of these changes look like they'd break checkout end to end like this, but tanya's email maintenance went live right before it all fell over. I still think that's worth a closer look."
+2026-06-12 09:12:03,PLAYER,online-boutique-9445,"Yes, @daniel can you please help with the maintenance channel?"
+2026-06-12 09:12:07,daniel,online-boutique-9445,App error logs and request traces are where we'll find the signal — want me to start pulling those?
+2026-06-12 09:12:19,PLAYER,online-boutique-9445,yes
+2026-06-12 09:12:55,PLAYER,online-boutique-9445,"Sure, @tanya can you please help us here?"
+2026-06-12 09:13:01,tanya,online-boutique-9445,"I'm mid-way through a canary rollout wiring up a secondary email provider. Maintenance window started at 09:07 UTC, about 5 minutes ago."
+2026-06-12 09:13:04,PLAYER,online-boutique-9445,what maintenance mail is @shay talking about?
+2026-06-12 09:13:10,tanya,online-boutique-9445,"Primary email provider hasn't been touched, it's running fine. Email confirmations have been going out, so this maintenance can't be causing checkout failures."
+2026-06-12 09:13:22,tanya,online-boutique-9445,"I'm deep in the vendor session, can't take on anything else. Daniel and Shay can cover the application side."
+2026-06-12 09:13:27,tanya,online-boutique-9445,"Can't step away, if I leave now we lose the vendor window and the rollout gets pushed back two weeks."
+2026-06-12 09:14:29,PLAYER,online-boutique-9445,Can you please tell me more about this maintance window?
+2026-06-12 09:14:33,tanya,online-boutique-9445,"I'm still on the vendor call for email maintenance, can't leave it right now."
+2026-06-12 09:15:02,PLAYER,online-boutique-9445,maybe provide some document that you followed or something like that?
+2026-06-12 09:15:09,tanya,online-boutique-9445,"Still on the vendor session. I could pause if you really need me, but we'd lose the canary rollout window and next slot is about 2 weeks out. Your call."
+2026-06-12 09:15:33,PLAYER,online-boutique-9445,I think this seems more urgent
+2026-06-12 09:15:39,tanya,online-boutique-9445,"Pausing the vendor session, rollout can wait. What do you need from me?"
+2026-06-12 09:15:42,PLAYER,online-boutique-9445,we're losing money already
+2026-06-12 09:15:47,bob,online-boutique-9445,"We're losing about £1,000 to £1,500 every minute this goes on. Zero successful transactions since the first complaints."
+2026-06-12 09:16:06,PLAYER,online-boutique-9445,@tanya please provide the document that you followed for the maintance window
+2026-06-12 09:16:11,tanya,online-boutique-9445,"Email maintenance is paused and on hold. It's not related to the checkout failures, totally separate system. How can I help here?"
+2026-06-12 09:16:13,PLAYER,online-boutique-9445,please elaborate more on that
+2026-06-12 09:16:19,tanya,online-boutique-9445,The email maintenance was a canary rollout for a new provider. It's paused now. No overlap with checkout systems.
+2026-06-12 09:17:01,PLAYER,online-boutique-9445,But it was done just before the outage
+2026-06-12 09:17:07,tanya,online-boutique-9445,Timing lines up but they're isolated systems. Email maintenance didn't touch anything related to checkout or payments.
+2026-06-12 09:17:26,PLAYER,online-boutique-9445,okay but can you please verify it again?
+2026-06-12 09:17:34,tanya,online-boutique-9445,"Confirmed, there's no technical overlap. Email and checkout run on different stacks. Nothing from the email work could impact payments."
+2026-06-12 09:18:07,PLAYER,online-boutique-9445,I still think it might be related
+2026-06-12 09:18:17,tanya,online-boutique-9445,"I've double-checked, there's no shared infrastructure or dependencies. Email work didn't touch anything in the checkout path."
+2026-06-12 09:18:54,PLAYER,online-boutique-9445,going through the changes now
+2026-06-12 09:19:00,tanya,online-boutique-9445,Let me know if you want me to check anything specific on the platform side.
+2026-06-12 09:19:08,PLAYER,online-boutique-9445,
+2026-06-12 09:19:08,uptimelabs,business-comms-9445,*Incident Number INC1019:* Checkout not working SEV-1
+2026-06-12 09:19:12,bez,business-comms-9445,How many customers are blocked from checking out? What’s the revenue loss per minute right now?
+2026-06-12 09:19:24,PLAYER,online-boutique-9445,@tanya just see if you see any red flags
+2026-06-12 09:19:30,tanya,online-boutique-9445,"Nothing obvious stands out on the platform side right now. All core services are up, no alerts firing."
+2026-06-12 09:19:40,PLAYER,business-comms-9445,"We're losing about £1,000 to £1,500 every minute this goes on. Zero successful transactions since the first complaints."
+2026-06-12 09:19:44,bez,business-comms-9445,Is this a total checkout outage or are any orders getting through at all?
+2026-06-12 09:19:53,PLAYER,business-comms-9445,total outage
+2026-06-12 09:19:57,bez,business-comms-9445,Do you know what’s causing this yet? Where exactly is the failure?
+2026-06-12 09:20:06,PLAYER,business-comms-9445,I'm still investigating it
+2026-06-12 09:20:10,bez,business-comms-9445,How long until this is fixed? I need a concrete ETA for the board.
+2026-06-12 09:20:12,PLAYER,business-comms-9445,going through the changes that went to LIVE
+2026-06-12 09:20:16,bez,business-comms-9445,"This is burning through our SLA. I need a timeline for recovery, not just activity. When will checkout be back up?"
+2026-06-12 09:20:28,PLAYER,business-comms-9445,Just give me some time
+2026-06-12 09:20:33,bez,business-comms-9445,Time is money. I need a real estimate. How much longer are we offline?
+2026-06-12 09:20:46,PLAYER,online-boutique-9445,@daniel do you seee any red flags in our applications?
+2026-06-12 09:20:56,PLAYER,business-comms-9445,10-15 minutea maybe
+2026-06-12 09:20:57,daniel,online-boutique-9445,No red flags in the app logs or metrics so far. Everything looks normal from the application side.
+2026-06-12 09:20:59,bez,business-comms-9445,10-15 minutes is a huge hit. Board will want answers. Update me the second you have a fix.
+2026-06-12 09:21:12,PLAYER,online-boutique-9445,@shay do you see any change that is borkwn maybe?
+2026-06-12 09:21:19,shay,online-boutique-9445,"yeah, let me look at mine. so my last prod change was on AdService, fallback ad slot logic. nothing jumped out to me but I can walk through it."
+2026-06-12 09:21:24,PLAYER,online-boutique-9445,as Tanya says it's not caused by Email Maintanance
+2026-06-12 09:21:36,PLAYER,business-comms-9445,Sure
+2026-06-12 09:21:39,bez,business-comms-9445,Have you found the root cause or are you still searching? I need to know if this is under control yet.
+2026-06-12 09:21:42,PLAYER,online-boutique-9445,@Shay
+2026-06-12 09:21:44,PLAYER,online-boutique-9445,go ahead
+2026-06-12 09:21:49,bob,online-boutique-9445,We still have zero successful transactions. Revenue loss is ongoing. I need to tell clients this is being worked on.
+2026-06-12 09:21:53,shay,online-boutique-9445,"Which change did you want to roll back, can you give me a CHG number or service name?"
+2026-06-12 09:21:58,PLAYER,business-comms-9445,still finsing the root cause
+2026-06-12 09:22:02,bez,business-comms-9445,Are you seeing any pattern in the failures? Is this isolated to one part of the platform or wider?
+2026-06-12 09:22:27,PLAYER,business-comms-9445,stil unlknown
+2026-06-12 09:22:32,bez,business-comms-9445,"If you don’t know what’s broken, that ETA is meaningless. I need specifics. What’s your next step to get answers?"
+2026-06-12 09:22:57,PLAYER,business-comms-9445,checking the changes
+2026-06-12 09:23:02,bez,business-comms-9445,Is there any indication this is linked to a recent deployment or config change? I need clarity on risk exposure.
+2026-06-12 09:23:07,PLAYER,online-boutique-9445,I'm not sure as we don't have a root cause yet
+2026-06-12 09:23:16,bob,online-boutique-9445,I just need to know this is top priority and being actively worked. Clients are pushing for updates.
+2026-06-12 09:23:24,shay,online-boutique-9445,I keep coming back to the email maintenance — DNS changes went live just before this all kicked off. zero successful transactions since then. that's not nothing.
+2026-06-12 09:23:35,PLAYER,online-boutique-9445,@tanya did you get any document fron the new provider?
+2026-06-12 09:23:41,tanya,online-boutique-9445,"Yes, I have the provider docs for the email rollout. But again, that's paused and not connected to checkout issues."
+2026-06-12 09:23:50,PLAYER,business-comms-9445,"Yes, there was an email maintenance "
+2026-06-12 09:23:53,bez,business-comms-9445,"Is that maintenance related to checkout at all, or just coincidence? Any evidence it triggered this outage?"
+2026-06-12 09:23:57,PLAYER,business-comms-9445,I'm suspecting it's cuased by it
+2026-06-12 09:24:01,bez,business-comms-9445,"If you think that’s the trigger, what’s the action plan? How fast can you reverse or isolate the impact?"
+2026-06-12 09:24:09,PLAYER,business-comms-9445,"No evidence till now, i""m just suspecting it"
+2026-06-12 09:24:14,bez,business-comms-9445,Speculation doesn’t help. I need facts. What’s the fastest way to confirm or rule out the maintenance as the cause?
+2026-06-12 09:24:22,PLAYER,online-boutique-9445,"But still, we need to go through that"
+2026-06-12 09:24:27,tanya,online-boutique-9445,"Understood. I can share the email provider doc if you want, but it's not linked to the checkout problem."
+2026-06-12 09:24:34,PLAYER,business-comms-9445,Checking the document shared by the new provider
+2026-06-12 09:24:38,bez,business-comms-9445,"How long will that take? I need a real update on progress, not just activity."
+2026-06-12 09:24:41,PLAYER,online-boutique-9445,Please share
+2026-06-12 09:24:47,tanya,online-boutique-9445,Here's the email provider rollout doc: https://uptime-labs.atlassian.net/wiki/external/NTYwNzYxYzRhMjU3NDAzNTgzOWJkNGIzYjZkYmJmYzU
+2026-06-12 09:24:54,PLAYER,business-comms-9445,Give me 5 mins and I'll provide an update
+2026-06-12 09:24:58,bez,business-comms-9445,Five minutes is more lost revenue. I expect a clear answer on cause and fix when you’re back.
+2026-06-12 09:27:36,PLAYER,business-comms-9445,sure
+2026-06-12 09:27:40,bez,business-comms-9445,I’m stepping away briefly to meet industry leaders at the summit fireside chat. I’ll keep checking in here. Don’t let this drag.
+2026-06-12 09:28:18,PLAYER,business-comms-9445,sure
+2026-06-12 09:28:22,bez,business-comms-9445,Is there any movement on root cause? Are we any closer to restoring checkout or still blocked?
+2026-06-12 09:28:25,PLAYER,online-boutique-9445,did we follow this?
+2026-06-12 09:28:26,PLAYER,online-boutique-9445,"All certs in scope are X.509 format. Each cert carries a subject, issuer, validity window, and public key. Short validity windows limit blast radius if a private key is ever compromised. PCI-DSS and ISO 27001 mandate periodic rotation for services touching payment and customer data. Private keys must never be copied to personal machines or logged to stdout during deployment scripts."
+2026-06-12 09:28:30,tanya,online-boutique-9445,"Yes, I followed the steps for the email rollout up to the pause. Again, it's not connected to checkout failures."
+2026-06-12 09:28:33,PLAYER,business-comms-9445,"Yes, we are"
+2026-06-12 09:28:37,bob,online-boutique-9445,"Still no successful transactions. We're losing about GBP 1,000 to 1,500 per minute at peak. This is critical."
+2026-06-12 09:28:38,bez,business-comms-9445,Are you saying you’ve found the cause or that checkout is coming back? Be specific. Is revenue flowing again or not?
+2026-06-12 09:28:42,PLAYER,business-comms-9445,This might be relaetd to the Email Maintenance itself
+2026-06-12 09:28:44,shay,online-boutique-9445,I keep coming back to the email maintenance — DNS changes went live just before this all kicked off. zero successful transactions since then. that's not nothing.
+2026-06-12 09:28:48,bez,business-comms-9445,Is that a confirmed link or just a theory? I need proof before I escalate this to the board.
+2026-06-12 09:28:57,PLAYER,business-comms-9445,Just a theory as of now
+2026-06-12 09:29:01,bez,business-comms-9445,"Then focus on evidence, not guesses. What’s the next concrete step to confirm or eliminate this theory?"
+2026-06-12 09:30:02,PLAYER,online-boutique-9445,I think that's what happened
+2026-06-12 09:30:03,PLAYER,online-boutique-9445,will reject connections where the bundle is incomplete or incorrectly ordered.
+2026-06-12 09:30:08,tanya,online-boutique-9445,"Just to be clear, the email maintenance is paused and unrelated. I'm focused on the checkout issue now. How can I help?"
+2026-06-12 09:30:15,bob,online-boutique-9445,No change on my side. Customers still can't check out. Complaints are coming in nonstop.
+2026-06-12 09:30:22,shay,online-boutique-9445,I keep coming back to the email maintenance — DNS changes went live just before this all kicked off. zero successful transactions since then. that's not nothing.
+2026-06-12 09:30:33,PLAYER,online-boutique-9445,@Tanya
+2026-06-12 09:30:36,PLAYER,online-boutique-9445,bot are related
+2026-06-12 09:30:43,bob,online-boutique-9445,Still seeing zero successful transactions. Business impact is severe. I need to tell clients this is being handled.
+2026-06-12 09:30:48,PLAYER,business-comms-9445,Still going through the documentation
+2026-06-12 09:30:52,shay,online-boutique-9445,I keep coming back to the email maintenance — DNS changes went live just before this all kicked off. zero successful transactions since then. that's not nothing.
+2026-06-12 09:30:57,bez,business-comms-9445,"How much longer until you have a definitive answer? I need a timeline, not just process updates."
+2026-06-12 09:31:23,PLAYER,online-boutique-9445,@Tanya
+2026-06-12 09:31:28,PLAYER,online-boutique-9445,it has affected Payment Service
+2026-06-12 09:31:29,PLAYER,online-boutique-9445,¹ PaymentService - The external payment gateway performs strict chain validation and will reject connections where the bundle is incomplete or incorrectly ordered. Likely error in case bundle is misordered - unable to get local issuer certificate means the bundle is misordered or incomplete. 
+2026-06-12 09:31:33,PLAYER,online-boutique-9445,We might need to restart
+2026-06-12 09:31:33,bob,online-boutique-9445,"Customers still can't pay, and we're getting more complaints every minute."
+2026-06-12 09:31:37,PLAYER,online-boutique-9445,Please guide
+2026-06-12 09:31:41,shay,online-boutique-9445,the email maintenance kicked off right when checkout failures started. still feels worth keeping an eye on — that timing hasn't gone away.
+2026-06-12 09:31:50,PLAYER,business-comms-9445,It's def caused by the new providre
+2026-06-12 09:31:51,shay,online-boutique-9445,"If checkout is broken, the immediate downstream services to check are EmailService, PaymentService, or ShippingService — one of these is likely what's actually broken."
+2026-06-12 09:32:02,daniel,online-boutique-9445,I've pulled PaymentService and CheckoutService logs now. See these are the critical errors found: https://assets.prod.uptimelabs.io/drill-assets/43/payment_logs.webp
+2026-06-12 09:32:13,daniel,online-boutique-9445,"Logs checked. PaymentService fails all outbound gateway handshakes. Checkout is healthy, just getting errors."
+2026-06-12 09:32:19,daniel,online-boutique-9445,No sign of app-side issues. It's only PaymentService outbound that's failing.
+2026-06-12 09:32:24,shay,online-boutique-9445,"This looks like a connection-level failure, not app logic. Should we pull Tanya off email maintenance to check from the platform side?"
+2026-06-12 09:32:29,bez,business-comms-9445,"If that’s confirmed, what’s the fix and how fast can you execute? Give me a time to recovery."
+2026-06-12 09:32:30,daniel,online-boutique-9445,"Every outbound attempt to the gateway fails at the handshake, nothing is getting through from PaymentService."
+2026-06-12 09:32:37,shay,online-boutique-9445,"Might be worth having Tanya check the platform side, just in case something's off at the server or network layer."
+2026-06-12 09:32:45,daniel,online-boutique-9445,"We can't restart without approval from Tinus or Hamed, they're both unavailable right now."
+2026-06-12 09:32:49,PLAYER,online-boutique-9445,@Tanya please gude us
+2026-06-12 09:32:59,PLAYER,business-comms-9445,We're working on the fix now
+2026-06-12 09:33:02,tanya,online-boutique-9445,"On it, checking the payments server now."
+2026-06-12 09:33:02,bez,business-comms-9445,"How long until checkout is back? I need a concrete ETA for recovery, not just that you’re working on it."
+2026-06-12 09:33:05,tanya,online-boutique-9445,"I ran a DNS probe on the outbound path to ClearBank. DNS is clean, ClearBank is reachable. Screenshot: https://assets.prod.uptimelabs.io/drill-assets/43/payment-service-kn342hhvk5khf2.webp"
+2026-06-12 09:33:16,tanya,online-boutique-9445,"It's not a network or DNS issue. PaymentService is failing at SSL certificate verification when connecting out to ClearBank. Container is healthy, failure is at the TLS handshake before any data is exchanged."
+2026-06-12 09:33:30,daniel,online-boutique-9445,"That's odd, PaymentService hasn't had any app deployments recently. Did anything change on the platform side that could affect payments? Tanya or Hamed?"
+2026-06-12 09:33:33,PLAYER,online-boutique-9445,@daniel do we need to restart?
+2026-06-12 09:33:39,daniel,online-boutique-9445,"We can't restart without approval from Tinus or Hamed, they're both unavailable right now."
+2026-06-12 09:33:52,PLAYER,online-boutique-9445,@Tanya please jump in
+2026-06-12 09:34:01,daniel,online-boutique-9445,"checked payments deployment history, only cert-related change is CHG90123, Tanya, PROD, SSL cert rotation across four services, 7 days ago."
+2026-06-12 09:34:10,daniel,online-boutique-9445,nothing from the app side on payments after that. cert rotation was the last thing that touched it.
+2026-06-12 09:34:15,tanya,online-boutique-9445,"yes, I handled that rotation. I followed the playbook in this activity doc: https://uptime-labs.atlassian.net/wiki/external/NTYwNzYxYzRhMjU3NDAzNTgzOWJkNGIzYjZkYmJmYzU"
+2026-06-12 09:34:16,PLAYER,business-comms-9445,"Still working on it, will provide you updates here"
+2026-06-12 09:34:20,bez,business-comms-9445,"I’m still monitoring this channel, even while at the summit. Keep updates coming as soon as you have them."
+2026-06-12 09:34:44,PLAYER,online-boutique-9445,@tanya did we follow the order?
+2026-06-12 09:34:49,tanya,online-boutique-9445,"The cert bundle was installed as provided. I didn't change the order, just placed it in /etc/payments/certs/ as per the doc."
+2026-06-12 09:35:02,PLAYER,business-comms-9445,sure
+2026-06-12 09:35:05,bez,business-comms-9445,Any progress on restoring checkout? I need to know if customers can transact yet or if we’re still down.
+2026-06-12 09:35:37,PLAYER,business-comms-9445,we're still down
+2026-06-12 09:35:40,bez,business-comms-9445,"Understood. I’m keeping this chat open during the summit, so update me the moment anything changes."
+2026-06-12 09:35:59,PLAYER,online-boutique-9445,did we follow these steps properly?
+2026-06-12 09:36:00,PLAYER,online-boutique-9445,"3. Rotation Steps
+Pre-rotation
+
+Confirm current cert expiry: openssl x509 -in /etc/[service]/certs/[cert].crt -noout -dates
+
+Check for active code freeze or deployment block — this affects which reload method is available.
+
+Request new cert from Vault PKI. Assemble bundle in correct order before copying.
+
+Confirm new cert validity: not-before ≤ today, not-after ~90 days out.
+
+Deployment
+
+Copy cert and key to target path on all pods.
+
+Verify file timestamps, size, and ownership post-copy. A zero-byte file or wrong ownership causes a silent load failure.
+
+Reload or restart per service requirements.
+
+Post-rotation
+
+Confirm process is running and logs are clean for 2–3 minutes.
+
+Record rotation in the activity log."
+2026-06-12 09:36:05,tanya,online-boutique-9445,I followed every step in the activity doc for CHG90123. The cert bundle was placed exactly as instructed.
+2026-06-12 09:36:06,PLAYER,business-comms-9445,sure
+2026-06-12 09:36:10,bez,business-comms-9445,Still tracking this from the summit. Let me know immediately if you have a breakthrough or need exec intervention.
+2026-06-12 09:36:16,tanya,online-boutique-9445,"I'm on the payments server now, checking the certificate files and bundle details."
+2026-06-12 09:36:22,PLAYER,online-boutique-9445,sure
+2026-06-12 09:36:22,tanya,online-boutique-9445,"here's what I'm seeing on the server:
+```
+Running process (PID 24891) — certificate currently loaded:
+  Subject:   CN=payment-service.online-boutique.svc.cluster.local
+  Issuer:    CN=online-boutique-internal-ca
+  Serial:    0A:3F:B2:11:CC:74:9D:E1
+  notBefore: Jun 12 08:27:49 2025 GMT
+  notAfter:  Jun 12 08:42:49 2026 GMT   ← EXPIRED
+
+Certificate on disk (not loaded by process):
+  Path:      /etc/ssl/certs/payment-service/tls.crt
+  Subject:   CN=payment-service.online-boutique.svc.cluster.local
+  Issuer:    CN=online-boutique-internal-ca
+  Serial:    0A:3F:B2:11:CC:74:9D:E2
+  notBefore: Jun 05 09:07:49 2026 GMT
+  notAfter:  Jun 05 09:07:49 2027 GMT
+```"
+2026-06-12 09:36:45,PLAYER,online-boutique-9445,so the certificate is expired?
+2026-06-12 09:36:58,tanya,online-boutique-9445,not sure why the process isn't picking up the new certificate
+2026-06-12 09:37:05,daniel,online-boutique-9445,"Yeah, the running process is still using the expired cert. The new one is on disk but not loaded yet."
+2026-06-12 09:37:35,PLAYER,online-boutique-9445,I think the sequence might. be wrong and hence they are not loaing
+2026-06-12 09:37:42,PLAYER,business-comms-9445,sure
+2026-06-12 09:37:46,bez,business-comms-9445,"Checking in again. Any movement on restoring checkout, or are we still at a standstill?"
+2026-06-12 09:37:48,daniel,online-boutique-9445,"payments app needs a bundle with two certs: leaf first, then intermediate. order matters for the handshake."
+2026-06-12 09:37:54,tanya,online-boutique-9445,"just checked the bundle file, order is flipped: intermediate is first, then leaf. that's not right."
+2026-06-12 09:38:01,tanya,online-boutique-9445,"here's what the bundle looks like:
+```
+$ kubectl exec -n online-boutique payment-service-7d6b9f7c4d-xk2pj -- \
+openssl storeutl -noout -text -certs \
+/etc/ssl/certs/payment-service/tls.crt \
+| grep -E ""Certificate:|Subject:|Issuer:""
+Certificate 0:
+Subject: CN=online-boutique-internal-ca, O=OnlineBoutique, C=GB  <- intermediate (should be cert 1)
+Issuer:  CN=online-boutique-internal-ca, O=OnlineBoutique, C=GB
+
+Certificate 1:
+Subject: CN=payment-service.online-boutique.svc.cluster.local
+Issuer:  CN=online-boutique-internal-ca, O=OnlineBoutique, C=GB
+```"
+2026-06-12 09:38:07,PLAYER,online-boutique-9445,yeah we need to correct that
+2026-06-12 09:38:24,PLAYER,business-comms-9445,yeah root cause is identified and the fix is in progress
+2026-06-12 09:38:39,tanya,online-boutique-9445,"leaf should be cert 0, intermediate should be cert 1, order in the bundle is reversed"
+2026-06-12 09:38:46,tanya,online-boutique-9445,we need to fix the order
+2026-06-12 09:38:50,bez,business-comms-9445,"Good. How long until checkout is live again? I need a real ETA for recovery, not just that a fix is underway."
+2026-06-12 09:38:50,PLAYER,online-boutique-9445,@tanya can you please correct it?
+2026-06-12 09:38:50,tanya,online-boutique-9445,correcting the cert chain bundle order now. Should take around 2 mins
+2026-06-12 09:39:04,PLAYER,business-comms-9445,2 mins
+2026-06-12 09:39:32,PLAYER,online-boutique-9445,are we done?
+2026-06-12 09:39:35,tanya,online-boutique-9445,"Bundle order is corrected: leaf cert is now cert 0, intermediate is cert 1. Change is on disk."
+2026-06-12 09:39:40,tanya,online-boutique-9445,"ran the verify check again, chain is good now:
+```
+$ openssl verify -CAfile /etc/ssl/certs/ca/ca.crt \
+-untrusted /etc/ssl/certs/payment-service/tls.crt \
+/etc/ssl/certs/payment-service/tls.crt
+/etc/ssl/certs/payment-service/tls.crt: OK
+```
+"
+2026-06-12 09:39:44,tanya,online-boutique-9445,But the running process still has the old order in memory. It won't pick this up until the service restarts.
+2026-06-12 09:39:49,PLAYER,online-boutique-9445,@bob can you please check now
+2026-06-12 09:39:50,bez,business-comms-9445,"Alright, I’ll stay on this channel. Ping me the second checkout is back and revenue is flowing again."
+2026-06-12 09:39:52,tanya,online-boutique-9445,Restarting the payments service in production during business hours needs explicit sign-off from Hamed or Tinus.
+2026-06-12 09:39:54,PLAYER,business-comms-9445,sure
+2026-06-12 09:39:59,shay,online-boutique-9445,"Last time we did a payments restart mid-day, it caused a brief outage for active checkouts."
+2026-06-12 09:40:01,bez,business-comms-9445,Still watching here. Let me know the instant we’re back up or if anything blocks the fix.
+2026-06-12 09:40:04,bob,online-boutique-9445,"Still getting complaints, customers can't pay and carts are being abandoned."
+2026-06-12 09:40:08,tanya,online-boutique-9445,"The bundle order is fixed and saved, but the running process still needs a restart to use it."
+2026-06-12 09:40:35,PLAYER,online-boutique-9445,Can we get an approval fro @bez ?
+2026-06-12 09:40:39,tanya,online-boutique-9445,"Bez can't approve a production restart, it has to come from Hamed or Tinus."
+2026-06-12 09:40:44,shay,online-boutique-9445,"Yeah, Bez doesn't sign off on technical restarts, that's always Hamed or Tinus."
+2026-06-12 09:40:51,PLAYER,business-comms-9445,can ypu p[lease approve the restart?
+2026-06-12 09:40:55,bez,business-comms-9445,"I don’t approve technical actions, that’s your call as incident lead. I’m here for business impact and escalation."
+2026-06-12 09:41:03,PLAYER,online-boutique-9445,But they are away ight
+2026-06-12 09:41:07,tanya,online-boutique-9445,"Both are unavailable today, so we can't restart payments without their explicit approval."
+2026-06-12 09:41:14,shay,online-boutique-9445,"We've been stuck before when both approvers were out, so just flagging the risk if we wait."
+2026-06-12 09:41:35,PLAYER,online-boutique-9445,Who else can approve it?
+2026-06-12 09:41:39,tanya,online-boutique-9445,"Only Hamed or Tinus can approve a production restart, no one else has that authority."
+2026-06-12 09:41:56,PLAYER,online-boutique-9445,what should we do here then?
+2026-06-12 09:42:00,tanya,online-boutique-9445,We can't restart payments in production without explicit sign-off from Hamed or Tinus.
+2026-06-12 09:42:02,PLAYER,online-boutique-9445,We can't just wait right
+2026-06-12 09:42:06,shay,online-boutique-9445,"Restarting payments without their OK has bitten us before, so it's risky to move ahead without it."
+2026-06-12 09:42:12,tanya,online-boutique-9445,"A production restart still needs Hamed or Tinus to sign off, even if waiting isn't ideal."
+2026-06-12 09:42:18,shay,online-boutique-9445,"We've had to hold off before, but it's always been their call for restarts in prod."
+2026-06-12 09:42:45,PLAYER,online-boutique-9445,But here the orders are not going through in PROD
+2026-06-12 09:42:51,tanya,online-boutique-9445,"Even with orders failing, I can't restart payments in prod without Hamed or Tinus giving the green light."
+2026-06-12 09:42:57,shay,online-boutique-9445,"I get the urgency, but we've always needed their sign-off for this kind of restart."
+2026-06-12 09:42:59,PLAYER,online-boutique-9445,It's an emergecy situation I'm guessong
+2026-06-12 09:43:04,tanya,online-boutique-9445,"Even in emergencies, the process is that only Hamed or Tinus can approve a production restart."
+2026-06-12 09:43:11,shay,online-boutique-9445,"We've had urgent cases before, but the rule's always been their sign-off for restarts in prod."
+2026-06-12 09:43:19,PLAYER,online-boutique-9445,Can we get hold of them by any chanve?
+2026-06-12 09:43:25,tanya,online-boutique-9445,"I've only ever seen Hamed or Tinus approve restarts in production, and both are unreachable right now."
+2026-06-12 09:43:33,shay,online-boutique-9445,"If they're both out, we're stuck until one of them is available to give the go-ahead."
+2026-06-12 09:43:50,PLAYER,online-boutique-9445,can someone reach out to them?
+2026-06-12 09:43:57,tanya,online-boutique-9445,"I've tried both, but neither Hamed nor Tinus is reachable for sign-off at the moment."
+2026-06-12 09:43:58,PLAYER,online-boutique-9445,and see id they are rechable?
+2026-06-12 09:44:03,shay,online-boutique-9445,"Yeah, both are out today, so we're blocked on the restart until one of them responds."
+2026-06-12 09:44:08,tanya,online-boutique-9445,"Restarting payments in production still requires explicit approval from Hamed or Tinus, even during business hours."
+2026-06-12 09:44:15,shay,online-boutique-9445,"Last time we had to wait for sign-off, it dragged out way longer than anyone wanted."
+2026-06-12 09:44:31,PLAYER,online-boutique-9445,@bez what would you suggest here/
+2026-06-12 09:44:37,tanya,online-boutique-9445,"A production restart during business hours needs explicit approval from Hamed or Tinus, no exceptions."
+2026-06-12 09:44:43,shay,online-boutique-9445,"We've seen issues escalate when restarts happen without the right sign-off, so it's always been a strict rule."
+2026-06-12 09:45:04,PLAYER,business-comms-9445,"I've only ever seen Hamed or Tinus approve restarts in production, and both are unreachable right now."
+2026-06-12 09:45:08,bez,business-comms-9445,"Understood. I’m not the technical sign-off, but I’m watching for business impact. Keep me posted on any progress or blockers."
+2026-06-12 09:45:33,PLAYER,business-comms-9445,We can't move ahead without their approval
+2026-06-12 09:45:36,bez,business-comms-9445,"I get the risk, but we can’t afford to stall. If you need to take responsibility, do it and keep me posted."
+2026-06-12 09:46:11,PLAYER,online-boutique-9445,"Can I approve it, just for this case? I've got the go-ahead from Bez"
+2026-06-12 09:46:18,tanya,online-boutique-9445,"Understood, I'm ready to restart payments as soon as you give the instruction."
+2026-06-12 09:46:23,PLAYER,online-boutique-9445,Go ahead
+2026-06-12 09:46:56,PLAYER,online-boutique-9445,is it done?
+2026-06-12 09:47:01,tanya,online-boutique-9445,"The bundle fix is in place on disk, but the running process still needs a restart to use it."
+2026-06-12 09:47:21,PLAYER,online-boutique-9445,did you restart?
+2026-06-12 09:47:27,tanya,online-boutique-9445,"The updated bundle is on the server, but payments won't use it until the process is restarted."
+2026-06-12 09:47:36,PLAYER,online-boutique-9445,please restart it
+2026-06-12 09:47:39,tanya,online-boutique-9445,"On it, restarting payments now. Should be back up in about a minute."
+2026-06-12 09:48:05,PLAYER,online-boutique-9445,is it back?
+2026-06-12 09:48:09,tanya,online-boutique-9445,"Restart complete. Updated cert bundle is loaded and active, payments service is back up internally. Maintenance banner is still showing though, so customers won't be able to reach checkout until that's removed."
+2026-06-12 09:48:18,daniel,online-boutique-9445,"backend looks good, orders going through cleanly, gateway connections are fine"
+2026-06-12 09:48:24,tanya,online-boutique-9445,"same from my side, service is healthy. Banner can come down."
+2026-06-12 09:48:30,PLAYER,online-boutique-9445,@daniel pleae remove the banner
+2026-06-12 09:48:34,shay,online-boutique-9445,"On it, taking the banner down now."
+2026-06-12 09:49:04,shay,online-boutique-9445,Banner's down — site's back to normal.
+2026-06-12 09:49:04,PLAYER,online-boutique-9445,is it done?
+2026-06-12 09:49:05,uptimelabs,online-boutique-9445,"You may have some housekeeping to wrap up before closing the drill, but if you're ready to finish now, just say ""incident resolved"" or ""closing this out""."
+2026-06-12 09:49:11,bob,online-boutique-9445,Complaint volume dropped off fast. No new issues coming in. The enterprise client has been told their payment will process soon.
+2026-06-12 09:49:20,PLAYER,online-boutique-9445,incident resolved
+2026-06-12 09:49:21,shay,online-boutique-9445,think we're good to close this out now?
+2026-06-12 09:49:24,daniel,online-boutique-9445,Everything looks stable now. High respect. You saved the day without any backup.
+2026-06-12 09:49:26,tanya,online-boutique-9445,Look at our commander! What a clean finish!
+2026-06-12 09:49:28,shay,online-boutique-9445,Handled like a pro. Even John Wick would be impressed.
+2026-06-12 09:49:30,bob,online-boutique-9445,"Customers are happy, I'm happy. You're a one person army! "
+2026-06-12 09:49:32,uptimelabs,online-boutique-9445,https://assets.prod.uptimelabs.io/drill-assets/43/congratulations_from_team.webp
+2026-06-12 09:49:44,uptimelabs,online-boutique-9445,"Drill Wrap-Up
+
+Thanks for playing! This session is now closed.
+
+Please return to your Uptime Labs tab to review your performance and complete the Retrospective & Feedback form.
+
+If you've already closed the tab, you can reopen the form using the button below."
