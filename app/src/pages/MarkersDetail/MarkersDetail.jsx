@@ -1,14 +1,11 @@
 import { useSessionData } from '../../hooks/useSessionData.js'
 import { groupMarkersByCategory, CATEGORY_ORDER } from '../../utils/markerUtils.js'
 import { computeAverage, formatAverageLabel, formatRatingLabel } from '../../utils/ratingUtils.js'
+import { stripBlockquote } from '../../utils/markdownUtils.js'
 import RatingBadge from '../../components/RatingBadge.jsx'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import styles from './MarkersDetail.module.css'
-
-function stripBlockquote(text) {
-  return text.split('\n').map(l => l.replace(/^>\s*/, '')).join('\n').trim()
-}
 
 export default function MarkersDetail({ session }) {
   const { data, error, loading } = useSessionData(session.sessionId, session.playerName)
@@ -68,7 +65,7 @@ export default function MarkersDetail({ session }) {
         <section className={`card ${styles.caveatsSection}`}>
           <h2 className={styles.summaryHeading}>Caveats</h2>
           <div className={styles.caveatsBody}>
-            {data.markersReport.caveats.split('\n').map((line, i) => <p key={i}>{line}</p>)}
+            {data.markersReport.caveats.split('\n').filter(Boolean).map((line, i) => <p key={i}>{line}</p>)}
           </div>
         </section>
       )}
