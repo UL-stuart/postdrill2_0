@@ -24,3 +24,12 @@
 .categoryName { font-weight: 700; }
 .categoryAvg { font-size: 0.85rem; color: var(--color-text-muted); }
 .categorySummary { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.6; }
+
+.facetsAvgRow { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 0.9rem; }
+.facetsAvgLabel { color: var(--color-text-muted); }
+.facetsAvgValue { font-weight: 600; }
+.facetList { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.facetRow { display: grid; grid-template-columns: 36px 40px 1fr; gap: 10px; align-items: start; }
+.facetId { font-size: 0.75rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; padding-top: 2px; }
+.facetName { font-weight: 600; font-size: 0.9rem; }
+.facetSummary { grid-column: 3; font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; }

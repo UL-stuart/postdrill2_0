@@ -4,6 +4,7 @@ import ErrorState from '../../components/ErrorState.jsx'
 import SessionMeta from './SessionMeta.jsx'
 import LookingAhead from './LookingAhead.jsx'
 import MarkersSummary from './MarkersSummary.jsx'
+import FacetsSummary from './FacetsSummary.jsx'
 import styles from './ReportOverview.module.css'
 
 export default function ReportOverview({ session, onNavigate }) {
@@ -20,6 +21,7 @@ export default function ReportOverview({ session, onNavigate }) {
       </header>
       <SessionMeta session={session} meta={data.meta} />
       <MarkersSummary markers={data.markersReport.markers} onNavigateToDetail={() => onNavigate('markers')} />
+      <FacetsSummary facets={data.facetsReport.facets} onNavigateToDetail={() => onNavigate('facets')} />
       <LookingAhead text={data.finalReport.lookingAhead} />
     </main>
   )
