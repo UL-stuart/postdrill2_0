@@ -16,3 +16,7 @@
 .thSpeaker, .tdSpeaker { width: 120px; font-weight: 600; white-space: nowrap; }
 .thChannel, .tdChannel { width: 180px; font-size: 0.8rem; color: var(--color-text-muted); white-space: nowrap; }
 .thMessage, .tdMessage { white-space: pre-wrap; word-break: break-word; line-height: 1.5; }
+
+.chartCard { margin-bottom: 20px; padding: 16px; }
+.chartContainer { width: 100%; overflow-x: auto; }
+.chartSvg { display: block; }
