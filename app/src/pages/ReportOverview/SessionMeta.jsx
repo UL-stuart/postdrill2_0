@@ -26,7 +26,7 @@ export default function SessionMeta({ session, meta }) {
       <div className={styles.drillDesc}>
         <h3 className={styles.drillDescLabel}>About this drill</h3>
         <p className={styles.drillDescText}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          Snipe Hunt is designed to stress your ability to reason through systemic complexity, separating misleading signals from real mechanisms, navigating coordination constraints when key people are unavailable, and synthesising information as it arrives from multiple sources under time pressure.
         </p>
       </div>
     </div>
