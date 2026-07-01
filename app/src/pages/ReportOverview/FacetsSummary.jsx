@@ -19,7 +19,7 @@ export default function FacetsSummary({ facets, onNavigateToDetail }) {
         {facets.map(facet => (
           <li key={facet.id} className={styles.facetRow}>
             <span className={styles.facetId}>{facet.id}</span>
-            <RatingBadge rating={facet.rating} />
+            <RatingBadge rating={facet.rating} showLabel />
             <div>
               <div className={styles.facetName}>{facet.name}</div>
               <div className={styles.facetSummary}>{extractFirstSentence(facet.rationale)}</div>
