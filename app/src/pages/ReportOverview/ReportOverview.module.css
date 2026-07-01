@@ -41,7 +41,6 @@
 .timeline { display: flex; align-items: center; width: 100%; padding: 0 24px; box-sizing: border-box; }
 .timelineGap { flex-basis: 0; flex-shrink: 0; }
 .timelineItem { position: relative; flex-shrink: 0; }
-.timelineDot { width: 12px; height: 12px; border-radius: 50%; background: var(--color-border); border: 2px solid var(--color-surface); position: relative; z-index: 1; }
-.timelineLast .timelineDot { background: #10b981; }
+.timelineDot { width: 12px; height: 12px; border-radius: 50%; background: #10b981; border: 2px solid var(--color-surface); position: relative; z-index: 1; }
 .timelineTs { position: absolute; bottom: calc(100% + 8px); left: 6px; transform: rotate(-90deg); transform-origin: left bottom; font-size: 0.75rem; color: var(--color-text-muted); white-space: nowrap; }
-.timelineLabel { position: absolute; top: calc(100% + 8px); left: auto; right: 6px; transform: rotate(-90deg); transform-origin: right top; font-size: 0.85rem; font-weight: 600; text-transform: capitalize; white-space: nowrap; }
+.timelineLabel { position: absolute; top: calc(100% + 8px); left: auto; right: 6px; transform: rotate(-90deg); transform-origin: right top; font-size: 0.75rem; color: var(--color-text-muted); text-transform: capitalize; white-space: nowrap; }

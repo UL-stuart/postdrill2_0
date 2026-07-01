@@ -36,7 +36,7 @@ export default function Timeline({ sessionStates }) {
         <div className={styles.timeline}>
           {sessionStates.map((entry, i) => (
             <Fragment key={i}>
-              <div className={`${styles.timelineItem} ${i === sessionStates.length - 1 ? styles.timelineLast : ''}`}>
+              <div className={styles.timelineItem}>
                 <div className={styles.timelineDot} />
                 <span className={styles.timelineTs}>{fmtElapsed(entry.timestamp - t0)}</span>
                 <span
