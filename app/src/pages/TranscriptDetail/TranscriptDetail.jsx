@@ -4,6 +4,7 @@ import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import EventDropsChart from './EventDropsChart.jsx'
 import TranscriptTable from './TranscriptTable.jsx'
+import TranscriptTimeline from './TranscriptTimeline.jsx'
 import styles from './TranscriptDetail.module.css'
 
 export default function TranscriptDetail({ session }) {
@@ -28,7 +29,12 @@ export default function TranscriptDetail({ session }) {
       <div className={`card ${styles.chartCard}`}>
         <EventDropsChart transcript={data.transcript.map((r, i) => ({ ...r, index: i }))} onDropClick={handleDropClick} />
       </div>
-      <TranscriptTable rows={data.transcript} highlightedIndex={highlightedIndex} />
+      <div className={styles.transcriptLayout}>
+        <div className={styles.tableColumn}>
+          <TranscriptTable rows={data.transcript} highlightedIndex={highlightedIndex} />
+        </div>
+        <TranscriptTimeline transcript={data.transcript} sessionStates={data.sessionStates} />
+      </div>
     </main>
   )
 }

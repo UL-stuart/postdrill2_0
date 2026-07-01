@@ -20,3 +20,14 @@
 .chartCard { margin-bottom: 20px; padding: 16px; }
 .chartContainer { width: 100%; overflow-x: auto; }
 .chartSvg { display: block; }
+
+.transcriptLayout { display: flex; align-items: flex-start; }
+.tableColumn { flex: 1; min-width: 0; }
+
+.sidebar { width: 160px; flex-shrink: 0; position: relative; align-self: stretch; }
+.rail { position: absolute; left: 18px; top: 0; bottom: 0; width: 2px; background: var(--color-border); }
+.marker { position: absolute; left: 12px; display: flex; align-items: center; gap: 6px; transform: translateY(-50%); }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: #10b981; flex-shrink: 0; }
+.markerLabels { display: flex; flex-direction: column; }
+.markerElapsed { font-size: 0.7rem; color: var(--color-text-muted); line-height: 1.3; }
+.markerState { font-size: 0.7rem; color: var(--color-text-muted); text-transform: capitalize; line-height: 1.3; }
