@@ -19,6 +19,6 @@ describe('formatAverageLabel', () => {
   it('null: "N/A"', () => expect(formatAverageLabel(null)).toBe('N/A'))
 })
 describe('formatRatingLabel', () => {
-  it('returns label for numeric', () => expect(formatRatingLabel(4)).toBe('Fluent'))
-  it('returns "Not observed" for N/A', () => expect(formatRatingLabel('N/A')).toBe('Not observed'))
+  it('returns "N: Label" for numeric', () => expect(formatRatingLabel(4)).toBe('4: Fluent'))
+  it('returns "N/A" for N/A', () => expect(formatRatingLabel('N/A')).toBe('N/A'))
 })

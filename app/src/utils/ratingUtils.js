@@ -1,8 +1,9 @@
 export const RATING_LABELS = { 1: 'Not evident', 2: 'Practicing', 3: 'Strengthening', 4: 'Fluent' }
 
 export function formatRatingLabel(rating) {
-  if (rating === 'N/A') return 'Not observed'
-  return RATING_LABELS[rating] ?? `Unknown (${rating})`
+  if (rating === 'N/A') return 'N/A'
+  const label = RATING_LABELS[rating]
+  return label ? `${rating}: ${label}` : `Unknown (${rating})`
 }
 
 export function computeAverage(ratings) {
