@@ -69,3 +69,29 @@ Duplicate IDs in a file are silently de-duped (first occurrence wins). The final
 **CSS** uses CSS Modules throughout. Global design tokens (colours, radius, shadow, font) are in `src/styles/global.css`. The `.card` and `.container` utility classes are global.
 
 **Vitest config** runs in `environment: 'node'` with `globals: true` and `TZ: 'UTC'` (the UTC override is required for `sessionMeta` tests to pass on non-UTC machines).
+
+## Git workflow
+
+For every change, follow this sequence:
+
+1. **Create a branch** before touching any files:
+   ```bash
+   git checkout -b <short-description>   # e.g. fix-marker-parsing or add-overview-chart
+   ```
+
+2. **Make the change** on that branch.
+
+3. **Test** — run the full test suite, then start the dev server and manually verify the change in the browser:
+   ```bash
+   cd app && npm test
+   npm run dev   # manually verify in browser before merging
+   ```
+
+4. **Merge to main** only after manual testing confirms the change is correct:
+   ```bash
+   git checkout main
+   git merge --no-ff <branch-name>
+   git branch -d <branch-name>
+   ```
+
+Never commit directly to `main`.
