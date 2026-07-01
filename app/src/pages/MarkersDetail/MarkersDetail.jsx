@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSessionData } from '../../hooks/useSessionData.js'
 import { groupMarkersByCategory, CATEGORY_ORDER } from '../../utils/markerUtils.js'
 import { computeAverage, formatAverageLabel, formatRatingLabel } from '../../utils/ratingUtils.js'
 import { stripBlockquote } from '../../utils/markdownUtils.js'
+import { parseMarkersCatalog } from '../../parsers/parseMarkersCatalog.js'
 import RatingBadge from '../../components/RatingBadge.jsx'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
@@ -10,8 +11,16 @@ import styles from './MarkersDetail.module.css'
 
 export default function MarkersDetail({ session }) {
   const { data, error, loading } = useSessionData(session.sessionId, session.playerName)
+  const [markerDescs, setMarkerDescs] = useState(null)
 
   useEffect(() => { document.title = `${session.playerName} — Post-Drill Report` }, [session.playerName])
+
+  useEffect(() => {
+    fetch('/data/facets_and_markers/markers-catalog.md')
+      .then(r => r.text())
+      .then(text => setMarkerDescs(parseMarkersCatalog(text)))
+      .catch(() => {})
+  }, [])
 
   if (loading) return <LoadingSpinner />
   if (error) return <ErrorState message={error} />
@@ -37,6 +46,9 @@ export default function MarkersDetail({ session }) {
                   <div>
                     <span className={styles.markerId}>{marker.id}</span>
                     <h3 className={styles.markerName}>{marker.name}</h3>
+                    {markerDescs?.[marker.id] && (
+                      <p className={styles.markerDescription}>{markerDescs[marker.id]}</p>
+                    )}
                   </div>
                   <div className={styles.markerRating}>
                     <RatingBadge rating={marker.rating} />
