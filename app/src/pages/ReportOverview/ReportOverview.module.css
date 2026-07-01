@@ -29,10 +29,10 @@
 .facetsAvgLabel { color: var(--color-text-muted); }
 .facetsAvgValue { font-weight: 600; }
 .facetList { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.facetRow { display: grid; grid-template-columns: 36px max-content 1fr; gap: 10px; align-items: start; }
-.facetId { font-size: 0.75rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; padding-top: 2px; }
+.facetRow { display: flex; flex-direction: column; gap: 4px; }
+.facetNameRow { display: flex; align-items: center; gap: 8px; }
 .facetName { font-weight: 600; font-size: 0.9rem; }
-.facetSummary { grid-column: 3; font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; }
+.facetSummary { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; }
 .facetsSummary {}
 
 .timelineCard {}
