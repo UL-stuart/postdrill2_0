@@ -5,6 +5,7 @@ import { computeAverage, formatAverageLabel } from '../../utils/ratingUtils.js'
 import { stripBlockquote } from '../../utils/markdownUtils.js'
 import { parseMarkersCatalog } from '../../parsers/parseMarkersCatalog.js'
 import RatingBadge from '../../components/RatingBadge.jsx'
+import RatingBarChart from '../../components/RatingBarChart.jsx'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import styles from './MarkersDetail.module.css'
@@ -26,10 +27,14 @@ export default function MarkersDetail({ session }) {
   if (error) return <ErrorState message={error} />
 
   const groups = groupMarkersByCategory(data.markersReport.markers)
+  const allMarkers = CATEGORY_ORDER.filter(cat => groups[cat]).flatMap(cat => groups[cat])
 
   return (
     <main className={`container ${styles.root}`}>
       <h1 className={styles.pageTitle}>Behavioural Markers</h1>
+      <div className={`card ${styles.chartCard}`}>
+        <RatingBarChart items={allMarkers.map(m => ({ label: m.name, rating: m.rating }))} />
+      </div>
 
       {CATEGORY_ORDER.filter(cat => groups[cat]).map(cat => {
         const catMarkers = groups[cat]
