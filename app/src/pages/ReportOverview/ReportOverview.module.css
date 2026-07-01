@@ -37,8 +37,7 @@
 
 .timeline { list-style: none; position: relative; padding-left: 24px; }
 .timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--color-border); }
-.timelineItem { position: relative; display: flex; align-items: flex-start; gap: 16px; padding-bottom: 20px; }
-.timelineItem:last-child { padding-bottom: 0; }
+.timelineItem { position: relative; display: flex; align-items: flex-start; gap: 16px; }
 .timelineDot { position: absolute; left: -20px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--color-border); border: 2px solid var(--color-surface); flex-shrink: 0; }
 .timelineLast .timelineDot { background: #10b981; }
 .timelineContent { display: flex; flex-direction: column; gap: 2px; }
