@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSessionData } from '../../hooks/useSessionData.js'
 import { groupMarkersByCategory, CATEGORY_ORDER } from '../../utils/markerUtils.js'
-import { computeAverage, formatAverageLabel, formatRatingLabel } from '../../utils/ratingUtils.js'
+import { computeAverage, formatAverageLabel } from '../../utils/ratingUtils.js'
 import { stripBlockquote } from '../../utils/markdownUtils.js'
 import { parseMarkersCatalog } from '../../parsers/parseMarkersCatalog.js'
 import RatingBadge from '../../components/RatingBadge.jsx'
@@ -43,17 +43,13 @@ export default function MarkersDetail({ session }) {
             {catMarkers.map(marker => (
               <article key={marker.id} className={`card ${styles.markerCard}`}>
                 <div className={styles.markerHeader}>
-                  <div>
-                    <span className={styles.markerId}>{marker.id}</span>
+                  <div className={styles.markerTitleRow}>
                     <h3 className={styles.markerName}>{marker.name}</h3>
-                    {markerDescs?.[marker.id] && (
-                      <p className={styles.markerDescription}>{markerDescs[marker.id]}</p>
-                    )}
+                    <RatingBadge rating={marker.rating} showLabel />
                   </div>
-                  <div className={styles.markerRating}>
-                    <RatingBadge rating={marker.rating} />
-                    <span className={styles.ratingLabel}>{formatRatingLabel(marker.rating)}</span>
-                  </div>
+                  {markerDescs?.[marker.id] && (
+                    <p className={styles.markerDescription}>{markerDescs[marker.id]}</p>
+                  )}
                 </div>
                 <div className={styles.markerBody}>
                   <div className={styles.fieldLabel}>Evidence</div>
