@@ -18,12 +18,11 @@ export default function FacetsSummary({ facets, onNavigateToDetail }) {
       <ul className={styles.facetList}>
         {facets.map(facet => (
           <li key={facet.id} className={styles.facetRow}>
-            <span className={styles.facetId}>{facet.id}</span>
-            <RatingBadge rating={facet.rating} showLabel />
-            <div>
-              <div className={styles.facetName}>{facet.name}</div>
-              <div className={styles.facetSummary}>{extractFirstSentence(facet.rationale)}</div>
+            <div className={styles.facetNameRow}>
+              <span className={styles.facetName}>{facet.name}</span>
+              <RatingBadge rating={facet.rating} showLabel />
             </div>
+            <div className={styles.facetSummary}>{extractFirstSentence(facet.rationale)}</div>
           </li>
         ))}
       </ul>
