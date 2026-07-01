@@ -74,4 +74,10 @@ describe('parseMarkersFile', () => {
     expect(markers[0].id).toBe('L3')
     expect(markers[0].name).toBe('Takes explicit ownership')
   })
+  it('uses first occurrence when a marker ID is duplicated', () => {
+    const dup = SAMPLE + `\n## L3 — Takes explicit ownership\n\n**Rating:** 1\n\n**Evidence:**\n> "duplicate"\n\n**Rationale:**\nDuplicate block with no rating field.\n`
+    const { markers } = parseMarkersFile(dup)
+    expect(markers.filter(m => m.id === 'L3')).toHaveLength(1)
+    expect(markers.find(m => m.id === 'L3').rating).toBe(3)
+  })
 })
