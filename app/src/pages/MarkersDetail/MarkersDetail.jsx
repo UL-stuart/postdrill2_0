@@ -33,7 +33,10 @@ export default function MarkersDetail({ session }) {
     <main className={`container ${styles.root}`}>
       <h1 className={styles.pageTitle}>Behavioural Markers</h1>
       <div className={`card ${styles.chartCard}`}>
-        <RatingBarChart items={allMarkers.map(m => ({ label: m.name, rating: m.rating }))} />
+        <RatingBarChart
+          items={allMarkers.map(m => ({ label: m.name, rating: m.rating }))}
+          onItemClick={i => document.getElementById(`marker-${allMarkers[i].id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+        />
       </div>
 
       {CATEGORY_ORDER.filter(cat => groups[cat]).map(cat => {
@@ -46,7 +49,7 @@ export default function MarkersDetail({ session }) {
               <span className={styles.categoryAvg}>{formatAverageLabel(avg)}</span>
             </div>
             {catMarkers.map(marker => (
-              <article key={marker.id} className={`card ${styles.markerCard}`}>
+              <article key={marker.id} id={`marker-${marker.id}`} className={`card ${styles.markerCard}`}>
                 <div className={styles.markerHeader}>
                   <div className={styles.markerTitleRow}>
                     <h3 className={styles.markerName}>{marker.name}</h3>
