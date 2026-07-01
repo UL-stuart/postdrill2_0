@@ -8,7 +8,7 @@ const AXIS_LABELS = [
   { pct: 100, text: 'Fluent' },
 ]
 
-export default function RatingBarChart({ items }) {
+export default function RatingBarChart({ items, onItemClick }) {
   return (
     <div className={styles.chart}>
       <div className={styles.axisRow}>
@@ -20,7 +20,11 @@ export default function RatingBarChart({ items }) {
         </div>
       </div>
       {items.map((item, i) => (
-        <div key={i} className={styles.barRow}>
+        <div
+          key={i}
+          className={`${styles.barRow} ${onItemClick ? styles.clickable : ''}`}
+          onClick={onItemClick ? () => onItemClick(i) : undefined}
+        >
           <div className={styles.barLabel} title={item.label}>{item.label}</div>
           <div className={styles.barTrack}>
             {AXIS_LABELS.map(({ pct }) => (

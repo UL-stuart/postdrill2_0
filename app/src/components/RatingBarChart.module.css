@@ -4,6 +4,8 @@
 .axisLabels { flex: 1; position: relative; height: 18px; }
 .axisLabel { position: absolute; font-size: 0.68rem; color: var(--color-text-muted); transform: translateX(-50%); white-space: nowrap; }
 .barRow { display: flex; align-items: center; margin-bottom: 5px; }
+.clickable { cursor: pointer; }
+.clickable:hover .barLabel { color: var(--color-accent); }
 .barLabel { width: 180px; flex-shrink: 0; font-size: 0.8rem; padding-right: 12px; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--color-text); }
 .barTrack { flex: 1; height: 18px; background: var(--color-bg); border-radius: 3px; position: relative; }
 .gridLine { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--color-border); }

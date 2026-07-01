@@ -54,11 +54,14 @@ export default function FacetsDetail({ session }) {
       </div>
 
       <div className={`card ${styles.chartCard}`}>
-        <RatingBarChart items={facets.map(f => ({ label: f.name, rating: f.rating }))} />
+        <RatingBarChart
+          items={facets.map(f => ({ label: f.name, rating: f.rating }))}
+          onItemClick={i => document.getElementById(`facet-${facets[i].id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+        />
       </div>
 
       {facets.map(facet => (
-        <article key={facet.id} className={`card ${styles.facetCard}`}>
+        <article key={facet.id} id={`facet-${facet.id}`} className={`card ${styles.facetCard}`}>
           <div className={styles.facetHeader}>
             <div className={styles.facetTitleRow}>
               <h2 className={styles.facetName}>{facet.name}</h2>
