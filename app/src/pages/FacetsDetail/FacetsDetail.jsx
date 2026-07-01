@@ -4,6 +4,7 @@ import { computeAverage, formatAverageLabel } from '../../utils/ratingUtils.js'
 import { stripBlockquote } from '../../utils/markdownUtils.js'
 import { parseFacetsCatalog } from '../../parsers/parseFacetsCatalog.js'
 import RatingBadge from '../../components/RatingBadge.jsx'
+import RatingBarChart from '../../components/RatingBarChart.jsx'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import styles from './FacetsDetail.module.css'
@@ -50,6 +51,10 @@ export default function FacetsDetail({ session }) {
       <div className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>Complexity Facets</h1>
         <span className={styles.overallAvg}>{formatAverageLabel(avg)}</span>
+      </div>
+
+      <div className={`card ${styles.chartCard}`}>
+        <RatingBarChart items={facets.map(f => ({ label: f.name, rating: f.rating }))} />
       </div>
 
       {facets.map(facet => (

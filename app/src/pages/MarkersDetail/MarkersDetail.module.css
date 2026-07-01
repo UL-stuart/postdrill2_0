@@ -6,6 +6,7 @@
 .categoryName { font-size: 1.1rem; font-weight: 700; }
 .categoryAvg { font-size: 0.9rem; color: var(--color-text-muted); }
 
+.chartCard { margin-bottom: 32px; }
 .markerCard { margin-bottom: 16px; }
 .markerHeader { margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--color-border); }
 .markerTitleRow { display: flex; align-items: center; gap: 10px; }
