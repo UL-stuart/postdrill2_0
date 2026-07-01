@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSessionData } from '../../hooks/useSessionData.js'
-import { computeAverage, formatAverageLabel, formatRatingLabel } from '../../utils/ratingUtils.js'
+import { computeAverage, formatAverageLabel } from '../../utils/ratingUtils.js'
 import { stripBlockquote } from '../../utils/markdownUtils.js'
 import { parseFacetsCatalog } from '../../parsers/parseFacetsCatalog.js'
 import RatingBadge from '../../components/RatingBadge.jsx'
@@ -55,17 +55,13 @@ export default function FacetsDetail({ session }) {
       {facets.map(facet => (
         <article key={facet.id} className={`card ${styles.facetCard}`}>
           <div className={styles.facetHeader}>
-            <div>
-              <span className={styles.facetId}>{facet.id}</span>
+            <div className={styles.facetTitleRow}>
               <h2 className={styles.facetName}>{facet.name}</h2>
-              {findFacetDesc(facet.name, facetDescs) && (
-                <p className={styles.facetDescription}>{findFacetDesc(facet.name, facetDescs)}</p>
-              )}
+              <RatingBadge rating={facet.rating} showLabel />
             </div>
-            <div className={styles.facetRating}>
-              <RatingBadge rating={facet.rating} />
-              <span className={styles.ratingLabel}>{formatRatingLabel(facet.rating)}</span>
-            </div>
+            {findFacetDesc(facet.name, facetDescs) && (
+              <p className={styles.facetDescription}>{findFacetDesc(facet.name, facetDescs)}</p>
+            )}
           </div>
           <div className={styles.facetBody}>
             <div className={styles.fieldLabel}>Evidence</div>
