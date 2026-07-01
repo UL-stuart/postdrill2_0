@@ -1,41 +1,58 @@
+import { useRef, useLayoutEffect, useState, Fragment } from 'react'
 import styles from './ReportOverview.module.css'
 
-const fmtTime = d => d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+function fmtElapsed(ms) {
+  const s = Math.round(ms / 1000)
+  const h = Math.floor(s / 3600)
+  const m = Math.floor((s % 3600) / 60)
+  const sec = s % 60
+  if (h > 0) return `+${h}:${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
+  return `+${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
+}
 
-const MIN_PB = 12
-const TOTAL_PX = 480
-
-function computePaddings(sessionStates) {
-  const n = sessionStates.length
-  if (n <= 1) return sessionStates.map(() => 0)
-  const totalMs = sessionStates[n - 1].timestamp - sessionStates[0].timestamp
-  return sessionStates.map((entry, i) => {
-    if (i === n - 1) return 0
-    const gapMs = sessionStates[i + 1].timestamp - entry.timestamp
-    return totalMs > 0 ? Math.max(MIN_PB, Math.round((gapMs / totalMs) * TOTAL_PX)) : MIN_PB
-  })
+function computeGaps(sessionStates) {
+  return sessionStates.slice(0, -1).map((entry, i) =>
+    sessionStates[i + 1].timestamp - entry.timestamp
+  )
 }
 
 export default function Timeline({ sessionStates }) {
-  const paddings = computePaddings(sessionStates)
+  const gaps = computeGaps(sessionStates)
+  const t0 = sessionStates[0]?.timestamp ?? 0
+  const labelRefs = useRef([])
+  const [bottomPad, setBottomPad] = useState(16)
+
+  useLayoutEffect(() => {
+    const widths = labelRefs.current.filter(Boolean).map(el => el.offsetWidth)
+    const maxW = Math.max(0, ...widths)
+    if (maxW > 0) setBottomPad(maxW + 16)
+  }, [sessionStates])
+
   return (
     <section className={`card ${styles.timelineCard}`}>
       <h2 className={styles.sectionHeading}>Timeline</h2>
-      <ol className={styles.timeline}>
-        {sessionStates.map((entry, i) => (
-          <li
-            key={i}
-            className={`${styles.timelineItem} ${i === sessionStates.length - 1 ? styles.timelineLast : ''}`}
-            style={{ paddingBottom: paddings[i] }}
-          >
-            <div className={styles.timelineDot} />
-            <div className={styles.timelineContent}>
-              <span className={styles.timelineLabel}>{entry.state.replace(/_/g, ' ')}</span>
-              <span className={styles.timelineTs}>{fmtTime(entry.timestamp)}</span>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <div className={styles.timelineWrapper} style={{ paddingBottom: bottomPad }}>
+        <div className={styles.timelineRail} />
+        <div className={styles.timeline}>
+          {sessionStates.map((entry, i) => (
+            <Fragment key={i}>
+              <div className={`${styles.timelineItem} ${i === sessionStates.length - 1 ? styles.timelineLast : ''}`}>
+                <div className={styles.timelineDot} />
+                <span className={styles.timelineTs}>{fmtElapsed(entry.timestamp - t0)}</span>
+                <span
+                  ref={el => { labelRefs.current[i] = el }}
+                  className={styles.timelineLabel}
+                >
+                  {entry.state.replace(/_/g, ' ')}
+                </span>
+              </div>
+              {i < sessionStates.length - 1 && (
+                <div className={styles.timelineGap} style={{ flexGrow: gaps[i] }} />
+              )}
+            </Fragment>
+          ))}
+        </div>
+      </div>
     </section>
   )
 }
