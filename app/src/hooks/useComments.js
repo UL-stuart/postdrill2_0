@@ -13,7 +13,14 @@ export default function useComments(sessionId) {
   }
 
   function setComment(key, text) {
-    const next = { ...comments, [key]: { text, createdAt: new Date().toISOString() } }
+    const existing = comments[key]
+    const next = {
+      ...comments,
+      [key]: {
+        text,
+        createdAt: existing?.createdAt ?? new Date().toISOString()
+      }
+    }
     setComments(next)
     saveComments(sessionId, next)
   }

@@ -17,8 +17,8 @@ export default function CommentCallout({ text, createdAt, onEdit, onDelete }) {
       </div>
       <p className={styles.text}>{text}</p>
       <div className={styles.actions}>
-        <button className={styles.actionBtn} onClick={onEdit}>Edit</button>
-        <button className={styles.actionBtn} onClick={onDelete}>Delete</button>
+        <button type="button" className={styles.actionBtn} onClick={onEdit}>Edit</button>
+        <button type="button" className={styles.actionBtn} onClick={onDelete}>Delete</button>
       </div>
     </div>
   )

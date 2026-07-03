@@ -20,8 +20,8 @@ export default function CommentDialog({ initialText = '', onSave, onCancel }) {
         autoFocus
       />
       <div className={styles.actions}>
-        <button className={styles.cancel} onClick={onCancel}>Cancel</button>
-        <button className={styles.save} onClick={handleSave} disabled={!text.trim()}>Save</button>
+        <button type="button" className={styles.cancel} onClick={onCancel}>Cancel</button>
+        <button type="button" className={styles.save} onClick={handleSave} disabled={!text.trim()}>Save</button>
       </div>
     </div>
   )

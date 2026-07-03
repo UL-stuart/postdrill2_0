@@ -3,6 +3,7 @@ import styles from './CommentButton.module.css'
 export default function CommentButton({ onClick, hasComment }) {
   return (
     <button
+      type="button"
       className={`${styles.button} ${hasComment ? styles.active : ''}`}
       onClick={onClick}
       title={hasComment ? 'Edit comment' : 'Add comment'}
