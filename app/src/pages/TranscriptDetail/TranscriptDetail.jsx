@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSessionData } from '../../hooks/useSessionData.js'
+import useComments from '../../hooks/useComments.js'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import EventDropsChart from './EventDropsChart.jsx'
@@ -9,6 +10,7 @@ import styles from './TranscriptDetail.module.css'
 
 export default function TranscriptDetail({ session }) {
   const { data, error, loading } = useSessionData(session.sessionId, session.playerName)
+  const commentControls = useComments(session.sessionId)
   const [highlightedIndex, setHighlightedIndex] = useState(null)
 
   useEffect(() => { document.title = `${session.playerName} — Post-Drill Report` }, [session.playerName])
@@ -31,7 +33,7 @@ export default function TranscriptDetail({ session }) {
       </div>
       <div className={styles.transcriptLayout}>
         <div className={styles.tableColumn}>
-          <TranscriptTable rows={data.transcript} highlightedIndex={highlightedIndex} />
+          <TranscriptTable rows={data.transcript} highlightedIndex={highlightedIndex} commentControls={commentControls} />
         </div>
         <TranscriptTimeline transcript={data.transcript} sessionStates={data.sessionStates} />
       </div>
