@@ -1,0 +1,141 @@
+.root {
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.section {
+  padding: 0;
+  overflow: hidden;
+}
+
+.sectionToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 16px 24px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.chevron {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  transform: rotate(90deg);
+  transition: transform 0.15s ease;
+  line-height: 1;
+}
+
+.chevronOpen {
+  transform: rotate(270deg);
+}
+
+.sectionBody {
+  padding: 0 24px 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.empty {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  padding-top: 16px;
+}
+
+.entry {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.entry:last-child {
+  border-bottom: none;
+}
+
+.entryLabel {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.entryText {
+  color: var(--color-text);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.entryDate {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.freeformSection {
+  margin-top: 8px;
+}
+
+.freeformTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.freeformTextarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+  resize: vertical;
+  outline: none;
+}
+
+.freeformTextarea:focus {
+  border-color: var(--color-accent);
+}
+
+.freeformActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.saveBtn {
+  padding: 7px 18px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.saveBtn:hover {
+  opacity: 0.9;
+}
+
+.savedIndicator {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}

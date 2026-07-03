@@ -5,6 +5,7 @@ import ReportOverview from './pages/ReportOverview/ReportOverview.jsx'
 import MarkersDetail from './pages/MarkersDetail/MarkersDetail.jsx'
 import FacetsDetail from './pages/FacetsDetail/FacetsDetail.jsx'
 import TranscriptDetail from './pages/TranscriptDetail/TranscriptDetail.jsx'
+import Reflections from './pages/Reflections/Reflections.jsx'
 import styles from './App.module.css'
 
 export default function App() {
@@ -27,7 +28,8 @@ export default function App() {
       {view === 'overview'   && <ReportOverview session={currentSession} onNavigate={setView} />}
       {view === 'markers'    && <MarkersDetail session={currentSession} />}
       {view === 'facets'     && <FacetsDetail session={currentSession} />}
-      {view === 'transcript' && <TranscriptDetail session={currentSession} />}
+      {view === 'transcript'  && <TranscriptDetail session={currentSession} />}
+      {view === 'reflections' && <Reflections session={currentSession} />}
     </div>
   )
 }
