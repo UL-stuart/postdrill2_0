@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useSessionData } from '../../hooks/useSessionData.js'
+import useComments from '../../hooks/useComments.js'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import SessionMeta from './SessionMeta.jsx'
@@ -11,6 +12,7 @@ import styles from './ReportOverview.module.css'
 
 export default function ReportOverview({ session, onNavigate }) {
   const { data, error, loading } = useSessionData(session.sessionId, session.playerName)
+  const commentControls = useComments(session.sessionId)
 
   useEffect(() => { document.title = `${session.playerName} — Post-Drill Report` }, [session.playerName])
 
@@ -25,9 +27,20 @@ export default function ReportOverview({ session, onNavigate }) {
       </header>
       <SessionMeta session={session} meta={data.meta} />
       <Timeline sessionStates={data.sessionStates} />
-      <MarkersSummary markers={data.markersReport.markers} onNavigateToDetail={() => onNavigate('markers')} />
-      <FacetsSummary facets={data.facetsReport.facets} onNavigateToDetail={() => onNavigate('facets')} />
-      <LookingAhead text={data.finalReport.lookingAhead} />
+      <MarkersSummary
+        markers={data.markersReport.markers}
+        onNavigateToDetail={() => onNavigate('markers')}
+        commentControls={commentControls}
+      />
+      <FacetsSummary
+        facets={data.facetsReport.facets}
+        onNavigateToDetail={() => onNavigate('facets')}
+        commentControls={commentControls}
+      />
+      <LookingAhead
+        text={data.finalReport.lookingAhead}
+        commentControls={commentControls}
+      />
     </main>
   )
 }
