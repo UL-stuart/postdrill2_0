@@ -5,6 +5,7 @@ const TABS = [
   { id: 'markers', label: 'Markers' },
   { id: 'facets', label: 'Facets' },
   { id: 'transcript', label: 'Transcript' },
+  { id: 'reflections', label: 'Reflections' },
 ]
 
 export default function Nav({ view, onNavigate, onBack, playerName, sessionId }) {

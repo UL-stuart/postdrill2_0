@@ -1,4 +1,4 @@
-import { loadComments, saveComments } from '../commentsStorage.js'
+import { loadComments, saveComments, groupCommentsByArea } from '../commentsStorage.js'
 
 let store = {}
 
@@ -56,5 +56,79 @@ describe('saveComments', () => {
     saveComments('xyz999', { 'lookingAhead': { text: 'B', createdAt: '2026-07-03T10:00:00Z' } })
     expect(JSON.parse(store['postdrill_comments_abc123'])['lookingAhead'].text).toBe('A')
     expect(JSON.parse(store['postdrill_comments_xyz999'])['lookingAhead'].text).toBe('B')
+  })
+})
+
+describe('groupCommentsByArea', () => {
+  const ts = '2026-07-03T10:00:00Z'
+
+  it('returns empty buckets for an empty comments object', () => {
+    const result = groupCommentsByArea({})
+    expect(result.markerCategories).toEqual([])
+    expect(result.individualMarkers).toEqual([])
+    expect(result.facets).toEqual([])
+    expect(result.lookingAhead).toBeNull()
+    expect(result.transcript).toEqual([])
+  })
+
+  it('routes marker category keys to markerCategories', () => {
+    const result = groupCommentsByArea({ 'marker:Leadership': { text: 'Good', createdAt: ts } })
+    expect(result.markerCategories).toHaveLength(1)
+    expect(result.markerCategories[0].key).toBe('marker:Leadership')
+    expect(result.markerCategories[0].text).toBe('Good')
+    expect(result.individualMarkers).toHaveLength(0)
+  })
+
+  it('routes individual marker keys to individualMarkers', () => {
+    const result = groupCommentsByArea({
+      'marker:L3': { text: 'Note', createdAt: ts },
+      'marker:C1': { text: 'Other', createdAt: ts },
+    })
+    expect(result.individualMarkers).toHaveLength(2)
+    expect(result.markerCategories).toHaveLength(0)
+  })
+
+  it('routes facet keys to facets', () => {
+    const result = groupCommentsByArea({ 'facet:F1': { text: 'Facet note', createdAt: ts } })
+    expect(result.facets).toHaveLength(1)
+    expect(result.facets[0].key).toBe('facet:F1')
+  })
+
+  it('captures lookingAhead as a single object', () => {
+    const result = groupCommentsByArea({ 'lookingAhead': { text: 'Forward', createdAt: ts } })
+    expect(result.lookingAhead).toEqual({ text: 'Forward', createdAt: ts })
+  })
+
+  it('routes tx keys to transcript with parsed index', () => {
+    const result = groupCommentsByArea({ 'tx:42': { text: 'Interesting', createdAt: ts } })
+    expect(result.transcript).toHaveLength(1)
+    expect(result.transcript[0].index).toBe(42)
+    expect(result.transcript[0].text).toBe('Interesting')
+  })
+
+  it('excludes reflections:freeform from all buckets', () => {
+    const result = groupCommentsByArea({ 'reflections:freeform': { text: 'Private', createdAt: ts } })
+    expect(result.markerCategories).toHaveLength(0)
+    expect(result.individualMarkers).toHaveLength(0)
+    expect(result.facets).toHaveLength(0)
+    expect(result.lookingAhead).toBeNull()
+    expect(result.transcript).toHaveLength(0)
+  })
+
+  it('handles all key types together', () => {
+    const comments = {
+      'marker:Mindset': { text: 'Cat', createdAt: ts },
+      'marker:M2': { text: 'Ind', createdAt: ts },
+      'facet:F3': { text: 'Fac', createdAt: ts },
+      'lookingAhead': { text: 'Fwd', createdAt: ts },
+      'tx:0': { text: 'Tx', createdAt: ts },
+      'reflections:freeform': { text: 'Skip', createdAt: ts },
+    }
+    const result = groupCommentsByArea(comments)
+    expect(result.markerCategories).toHaveLength(1)
+    expect(result.individualMarkers).toHaveLength(1)
+    expect(result.facets).toHaveLength(1)
+    expect(result.lookingAhead).not.toBeNull()
+    expect(result.transcript).toHaveLength(1)
   })
 })
