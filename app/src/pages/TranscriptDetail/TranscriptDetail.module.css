@@ -16,6 +16,9 @@
 .thSpeaker, .tdSpeaker { width: 120px; font-weight: 600; white-space: nowrap; }
 .thChannel, .tdChannel { width: 180px; font-size: 0.8rem; color: var(--color-text-muted); white-space: nowrap; }
 .thMessage, .tdMessage { white-space: pre-wrap; word-break: break-word; line-height: 1.5; }
+.thComment { width: 36px; padding: 0; }
+.tdComment { width: 36px; padding: 0; vertical-align: top; }
+.commentRow td { padding: 0 12px 8px; border-bottom: none; background: var(--color-surface); }
 
 .chartCard { margin-bottom: 20px; padding: 16px; }
 .chartContainer { width: 100%; overflow-x: auto; }
