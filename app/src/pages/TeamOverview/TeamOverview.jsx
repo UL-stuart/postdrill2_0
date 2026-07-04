@@ -39,7 +39,7 @@ export default function TeamOverview({ onBack }) {
 
   return (
     <div className={styles.root}>
-      <div className={`container ${styles.inner}`}>
+      <div className="container">
         <button className={styles.backBtn} onClick={onBack}>← All Sessions</button>
 
         <h1 className={styles.pageTitle}>Team Overview</h1>
