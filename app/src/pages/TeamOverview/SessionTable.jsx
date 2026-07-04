@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import useSessionSummaries from '../../hooks/useSessionSummaries.js'
 import styles from './SessionTable.module.css'
 
@@ -26,13 +27,41 @@ function toTitleCase(str) {
   return str.replace(/\b\w/g, c => c.toUpperCase())
 }
 
+const COLUMNS = [
+  { key: 'date',       label: 'Date',            align: 'left' },
+  { key: 'player',     label: 'Player',          align: 'left' },
+  { key: 'runtime',    label: 'Resolution time', align: 'left' },
+  { key: 'markersAvg', label: 'Markers avg',     align: 'right' },
+  { key: 'facetsAvg',  label: 'Facets avg',      align: 'right' },
+]
+
+function sortValue(session, summary, key) {
+  switch (key) {
+    case 'date':       return session.date ? new Date(session.date).getTime() : Infinity
+    case 'player':     return session.playerName.toLowerCase()
+    case 'runtime':    return session.completed ? (session.runtimeSeconds ?? Infinity) : Infinity
+    case 'markersAvg': return summary?.markersAvg ?? -Infinity
+    case 'facetsAvg':  return summary?.facetsAvg ?? -Infinity
+    default:           return 0
+  }
+}
+
 export default function SessionTable({ sessions, onSelectSession }) {
   const { summaries, loading } = useSessionSummaries(sessions)
+  const [sortKey, setSortKey] = useState('date')
+  const [sortAsc, setSortAsc] = useState(true)
+
+  function handleHeaderClick(key) {
+    if (sortKey === key) setSortAsc(a => !a)
+    else { setSortKey(key); setSortAsc(true) }
+  }
 
   const sorted = [...sessions].sort((a, b) => {
-    if (!a.date) return 1
-    if (!b.date) return -1
-    return new Date(a.date) - new Date(b.date)
+    const av = sortValue(a, summaries[a.sessionId], sortKey)
+    const bv = sortValue(b, summaries[b.sessionId], sortKey)
+    if (av < bv) return sortAsc ? -1 : 1
+    if (av > bv) return sortAsc ? 1 : -1
+    return 0
   })
 
   return (
@@ -40,11 +69,19 @@ export default function SessionTable({ sessions, onSelectSession }) {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.th}>Date</th>
-            <th className={styles.th}>Player</th>
-            <th className={styles.th}>Resolution time</th>
-            <th className={`${styles.th} ${styles.numCol}`}>Markers avg</th>
-            <th className={`${styles.th} ${styles.numCol}`}>Facets avg</th>
+            {COLUMNS.map(col => (
+              <th
+                key={col.key}
+                className={`${styles.th} ${col.align === 'right' ? styles.numCol : ''} ${styles.sortable} ${sortKey === col.key ? styles.sorted : ''}`}
+                onClick={() => handleHeaderClick(col.key)}
+                aria-sort={sortKey === col.key ? (sortAsc ? 'ascending' : 'descending') : 'none'}
+              >
+                {col.label}
+                <span className={styles.sortIndicator}>
+                  {sortKey === col.key ? (sortAsc ? ' ↑' : ' ↓') : ' ↕'}
+                </span>
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>

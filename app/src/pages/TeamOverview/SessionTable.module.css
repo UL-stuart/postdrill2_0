@@ -20,6 +20,24 @@
   white-space: nowrap;
 }
 
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable:hover {
+  color: var(--color-text);
+}
+
+.sorted {
+  color: var(--color-accent);
+}
+
+.sortIndicator {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
 .numCol {
   text-align: right;
 }
