@@ -1,0 +1,80 @@
+.root {
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding: 32px 0 64px;
+}
+
+.inner {
+  max-width: 900px;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.backBtn:hover {
+  color: var(--color-text);
+}
+
+.pageTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.descCard {
+  margin-bottom: 16px;
+}
+
+.drillName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.drillDesc {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.statCard {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 20px 24px;
+}
+
+.statNumber {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.statLabel {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+}
+
+.chartCard {
+  margin-bottom: 16px;
+}
+
+.chartTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}

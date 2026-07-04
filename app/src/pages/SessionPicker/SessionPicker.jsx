@@ -8,7 +8,7 @@ function toTitleCase(str) {
   return str.replace(/\b\w/g, c => c.toUpperCase())
 }
 
-export default function SessionPicker({ onSelectSession }) {
+export default function SessionPicker({ onSelectSession, onShowTeamOverview }) {
   useEffect(() => { document.title = 'Post-Drill Reports — Uptime Labs' }, [])
   const { sessions, error, loading } = useSessionList()
 
@@ -21,6 +21,9 @@ export default function SessionPicker({ onSelectSession }) {
         <header className={styles.header}>
           <h1 className={styles.title}>Post-Drill Reports</h1>
           <p className={styles.subtitle}>Snipe Hunt · {sessions.length} sessions</p>
+          <button className={styles.overviewBtn} onClick={onShowTeamOverview}>
+            Team Overview →
+          </button>
         </header>
         <div className={styles.grid}>
           {sessions.map(session => (
