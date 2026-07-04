@@ -8,6 +8,7 @@ import Timeline from './Timeline.jsx'
 import LookingAhead from './LookingAhead.jsx'
 import MarkersSummary from './MarkersSummary.jsx'
 import FacetsSummary from './FacetsSummary.jsx'
+import SessionRadarCharts from './SessionRadarCharts.jsx'
 import styles from './ReportOverview.module.css'
 
 export default function ReportOverview({ session, onNavigate }) {
@@ -40,6 +41,10 @@ export default function ReportOverview({ session, onNavigate }) {
       <LookingAhead
         text={data.finalReport.lookingAhead}
         commentControls={commentControls}
+      />
+      <SessionRadarCharts
+        markers={data.markersReport.markers}
+        facets={data.facetsReport.facets}
       />
     </main>
   )

@@ -32,6 +32,21 @@ function cohortStats(summaries, keys, getter) {
   }))
 }
 
+export function cohortMaxValues(summaries, keys, getter) {
+  return Object.fromEntries(keys.map(key => {
+    const vals = Object.values(summaries).map(s => getter(s, key)).filter(v => v != null)
+    return [key, vals.length ? Math.max(...vals) : null]
+  }))
+}
+
+function statsToSeries(stats, keys) {
+  return [
+    { label: 'Max', values: Object.fromEntries(keys.map(k => [k, stats[k]?.max])), color: '#93c5fd', fillOpacity: 0.3, dashed: true },
+    { label: 'Min', values: Object.fromEntries(keys.map(k => [k, stats[k]?.min])), color: '#a5b4fc', fillOpacity: 0.3, dashed: true },
+    { label: 'Avg', values: Object.fromEntries(keys.map(k => [k, stats[k]?.avg])), color: '#1d4ed8', fillOpacity: 0.15, dashed: false },
+  ]
+}
+
 export default function TeamOverview({ onBack, onSelectSession }) {
   useEffect(() => { document.title = 'Team Overview — Uptime Labs' }, [])
 
@@ -102,14 +117,20 @@ export default function TeamOverview({ onBack, onSelectSession }) {
               <h2 className={styles.chartTitle}>Cohort — Marker Categories</h2>
               <RadarChart
                 dimensions={CATEGORY_DIMENSIONS}
-                stats={cohortStats(summaries, CATEGORY_ORDER, (s, k) => s.categoryRatings?.[k])}
+                series={statsToSeries(
+                  cohortStats(summaries, CATEGORY_ORDER, (s, k) => s.categoryRatings?.[k]),
+                  CATEGORY_ORDER
+                )}
               />
             </div>
             <div className={`card ${styles.radarCard}`}>
               <h2 className={styles.chartTitle}>Cohort — Facets</h2>
               <RadarChart
                 dimensions={FACET_DIMENSIONS}
-                stats={cohortStats(summaries, FACET_DIMENSIONS.map(d => d.key), (s, k) => s.facetRatings?.[k])}
+                series={statsToSeries(
+                  cohortStats(summaries, FACET_DIMENSIONS.map(d => d.key), (s, k) => s.facetRatings?.[k]),
+                  FACET_DIMENSIONS.map(d => d.key)
+                )}
               />
             </div>
           </div>
