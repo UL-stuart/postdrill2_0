@@ -46,13 +46,14 @@
 
 .labelRow {
   position: relative;
-  height: 20px;
+  height: 52px;
   margin-top: 6px;
 }
 
 .dateLabel {
   position: absolute;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotate(-45deg);
+  transform-origin: top center;
   font-size: 0.7rem;
   color: var(--color-text-muted);
   white-space: nowrap;
