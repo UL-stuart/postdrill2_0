@@ -31,6 +31,9 @@ export default function TeamOverview({ onBack }) {
   const chartStart = yearAgo
   const chartEnd = now
 
+  const timelineStart = uniqueSessions.length ? new Date(uniqueSessions[0].date) : yearAgo
+  const timelineEnd = uniqueSessions.length ? new Date(uniqueSessions[uniqueSessions.length - 1].date) : now
+
   return (
     <div className={styles.root}>
       <div className="container">
@@ -55,7 +58,7 @@ export default function TeamOverview({ onBack }) {
 
         <div className={`card ${styles.chartCard}`}>
           <h2 className={styles.chartTitle}>Activity — Timeline</h2>
-          <ActivityTimeline sessions={uniqueSessions} start={chartStart} end={chartEnd} />
+          <ActivityTimeline sessions={uniqueSessions} start={timelineStart} end={timelineEnd} />
         </div>
       </div>
     </div>
