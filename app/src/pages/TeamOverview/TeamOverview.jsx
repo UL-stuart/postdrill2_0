@@ -25,17 +25,11 @@ export default function TeamOverview({ onBack }) {
   ).sort((a, b) => new Date(a.date) - new Date(b.date))
 
   const now = new Date()
-  const minStart = new Date(now)
-  minStart.setUTCDate(minStart.getUTCDate() - 90)
+  const yearAgo = new Date(now)
+  yearAgo.setUTCFullYear(yearAgo.getUTCFullYear() - 1)
 
-  const earliestDate = uniqueSessions.length ? new Date(uniqueSessions[0].date) : minStart
-  const latestDate = uniqueSessions.length ? new Date(uniqueSessions[uniqueSessions.length - 1].date) : now
-
-  const chartStart = earliestDate < minStart ? earliestDate : minStart
+  const chartStart = yearAgo
   const chartEnd = now
-
-  const timelineStart = earliestDate
-  const timelineEnd = latestDate
 
   return (
     <div className={styles.root}>
@@ -61,7 +55,7 @@ export default function TeamOverview({ onBack }) {
 
         <div className={`card ${styles.chartCard}`}>
           <h2 className={styles.chartTitle}>Activity — Timeline</h2>
-          <ActivityTimeline sessions={uniqueSessions} start={timelineStart} end={timelineEnd} />
+          <ActivityTimeline sessions={uniqueSessions} start={chartStart} end={chartEnd} />
         </div>
       </div>
     </div>
