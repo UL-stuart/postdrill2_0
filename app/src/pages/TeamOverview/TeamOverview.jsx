@@ -1,17 +1,42 @@
 import { useEffect } from 'react'
 import { useSessionList } from '../../hooks/useSessionList.js'
+import useSessionSummaries from '../../hooks/useSessionSummaries.js'
 import { DRILL_NAME, DRILL_DESCRIPTION } from '../../utils/drillInfo.js'
+import { CATEGORY_ORDER } from '../../utils/markerUtils.js'
 import ActivityCalendar from '../../components/ActivityCalendar/ActivityCalendar.jsx'
 import ActivityTimeline from '../../components/ActivityTimeline/ActivityTimeline.jsx'
 import SessionTable from './SessionTable.jsx'
+import RadarChart from '../../components/RadarChart/RadarChart.jsx'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import styles from './TeamOverview.module.css'
+
+const FACET_DIMENSIONS = [
+  { key: 'F1', label: 'Misleading correlations' },
+  { key: 'F2', label: 'Hidden coupling' },
+  { key: 'F3', label: 'Decreased access to team' },
+  { key: 'F4', label: 'Coordination bottlenecks' },
+  { key: 'F5', label: 'Data overload' },
+]
+
+const CATEGORY_DIMENSIONS = CATEGORY_ORDER.map(cat => ({ key: cat, label: cat }))
+
+function cohortStats(summaries, keys, getter) {
+  return Object.fromEntries(keys.map(key => {
+    const vals = Object.values(summaries).map(s => getter(s, key)).filter(v => v != null)
+    return [key, {
+      avg: vals.length ? vals.reduce((a, b) => a + b) / vals.length : null,
+      min: vals.length ? Math.min(...vals) : null,
+      max: vals.length ? Math.max(...vals) : null,
+    }]
+  }))
+}
 
 export default function TeamOverview({ onBack, onSelectSession }) {
   useEffect(() => { document.title = 'Team Overview — Uptime Labs' }, [])
 
   const { sessions, error, loading } = useSessionList()
+  const { summaries, loading: summariesLoading } = useSessionSummaries(loading ? [] : sessions)
 
   if (loading) return <LoadingSpinner label="Loading overview…" />
   if (error) return <ErrorState message={error} />
@@ -66,6 +91,29 @@ export default function TeamOverview({ onBack, onSelectSession }) {
           <h2 className={styles.chartTitle}>Sessions</h2>
           <SessionTable sessions={sessions} onSelectSession={onSelectSession} />
         </div>
+
+        {summariesLoading ? (
+          <div className={`card ${styles.chartCard}`}>
+            <p className={styles.loadingMsg}>Loading cohort data…</p>
+          </div>
+        ) : (
+          <div className={styles.radarRow}>
+            <div className={`card ${styles.radarCard}`}>
+              <h2 className={styles.chartTitle}>Cohort — Marker Categories</h2>
+              <RadarChart
+                dimensions={CATEGORY_DIMENSIONS}
+                stats={cohortStats(summaries, CATEGORY_ORDER, (s, k) => s.categoryRatings?.[k])}
+              />
+            </div>
+            <div className={`card ${styles.radarCard}`}>
+              <h2 className={styles.chartTitle}>Cohort — Facets</h2>
+              <RadarChart
+                dimensions={FACET_DIMENSIONS}
+                stats={cohortStats(summaries, FACET_DIMENSIONS.map(d => d.key), (s, k) => s.facetRatings?.[k])}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
