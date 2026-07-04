@@ -25,10 +25,10 @@ function toPathD(points) {
   return points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(2)},${p.y.toFixed(2)}`).join(' ') + ' Z'
 }
 
-function dimensionPoints(dimensions, getter, scaleMax) {
+function seriesPoints(dimensions, values, scaleMax) {
   return dimensions.map((dim, i) => {
     const angle = axisAngle(i, dimensions.length)
-    const r = valueToR(getter(dim.key), scaleMax)
+    const r = valueToR(values?.[dim.key], scaleMax)
     return polarToXY(CX, CY, angle, r)
   })
 }
@@ -56,18 +56,16 @@ function RadarLabel({ label, angle }) {
   const words = label.split(' ')
   const LINE_H = 13
 
-  // Split into lines of max 2 words
   const lines = []
   for (let i = 0; i < words.length; i += 2) {
     lines.push(words.slice(i, i + 2).join(' '))
   }
 
-  // Vertical centering: shift first dy so block is centred at y
   const totalH = lines.length * LINE_H
   let startY = y
   if (baseline === 'middle') startY = y - (totalH / 2) + LINE_H * 0.35
   else if (baseline === 'auto') startY = y - totalH + LINE_H * 0.35
-  else startY = y  // hanging
+  else startY = y
 
   return (
     <text textAnchor={anchor} fontSize="11" fill="var(--color-text-muted)">
@@ -78,12 +76,12 @@ function RadarLabel({ label, angle }) {
   )
 }
 
-export default function RadarChart({ dimensions, stats, scaleMax = 4 }) {
+/**
+ * series: [{ label, values: { [dimKey]: number|null }, color, fillOpacity, dashed }]
+ * Rendered back-to-front (first series is furthest back).
+ */
+export default function RadarChart({ dimensions, series, scaleMax = 4 }) {
   const n = dimensions.length
-
-  const avgPoints = dimensionPoints(dimensions, k => stats[k]?.avg, scaleMax)
-  const minPoints = dimensionPoints(dimensions, k => stats[k]?.min, scaleMax)
-  const maxPoints = dimensionPoints(dimensions, k => stats[k]?.max, scaleMax)
 
   const ringPoints = (r) =>
     dimensions.map((_, i) => polarToXY(CX, CY, axisAngle(i, n), r))
@@ -107,7 +105,7 @@ export default function RadarChart({ dimensions, stats, scaleMax = 4 }) {
           )
         })}
 
-        {/* Ring value labels (on the top axis) */}
+        {/* Ring value labels (along top axis) */}
         {RINGS.map(v => {
           const r = valueToR(v, scaleMax)
           const angle = axisAngle(0, n)
@@ -124,48 +122,30 @@ export default function RadarChart({ dimensions, stats, scaleMax = 4 }) {
           const angle = axisAngle(i, n)
           const tip = polarToXY(CX, CY, angle, R_MAX)
           return (
-            <line
-              key={i}
-              x1={CX} y1={CY}
-              x2={tip.x.toFixed(2)} y2={tip.y.toFixed(2)}
-              stroke="var(--color-border)"
-              strokeWidth="1"
+            <line key={i} x1={CX} y1={CY} x2={tip.x.toFixed(2)} y2={tip.y.toFixed(2)}
+              stroke="var(--color-border)" strokeWidth="1" />
+          )
+        })}
+
+        {/* Series polygons — back to front */}
+        {series.map(s => {
+          const pts = seriesPoints(dimensions, s.values, scaleMax)
+          return (
+            <path
+              key={s.label}
+              d={toPathD(pts)}
+              fill={s.color}
+              fillOpacity={s.fillOpacity ?? 0.15}
+              stroke={s.color}
+              strokeWidth={s.dashed ? 1.5 : 2}
+              strokeDasharray={s.dashed ? '4 3' : undefined}
             />
           )
         })}
 
-        {/* Max polygon (back) */}
-        <path
-          d={toPathD(maxPoints)}
-          fill="#dbeafe"
-          fillOpacity="0.4"
-          stroke="#93c5fd"
-          strokeWidth="1.5"
-          strokeDasharray="4 3"
-        />
-
-        {/* Min polygon */}
-        <path
-          d={toPathD(minPoints)}
-          fill="#e0e7ff"
-          fillOpacity="0.5"
-          stroke="#a5b4fc"
-          strokeWidth="1.5"
-          strokeDasharray="4 3"
-        />
-
-        {/* Avg polygon (front) */}
-        <path
-          d={toPathD(avgPoints)}
-          fill="var(--color-accent)"
-          fillOpacity="0.15"
-          stroke="var(--color-accent)"
-          strokeWidth="2"
-        />
-
-        {/* Avg dots */}
-        {avgPoints.map((p, i) => (
-          <circle key={i} cx={p.x} cy={p.y} r="3" fill="var(--color-accent)" />
+        {/* Dots on the last (front-most) series only */}
+        {series.length > 0 && seriesPoints(dimensions, series[series.length - 1].values, scaleMax).map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r="3" fill={series[series.length - 1].color} />
         ))}
 
         {/* Axis labels */}
@@ -176,15 +156,17 @@ export default function RadarChart({ dimensions, stats, scaleMax = 4 }) {
       </svg>
 
       <div className={styles.legend}>
-        <span className={styles.legendItem}>
-          <span className={`${styles.swatch} ${styles.swatchAvg}`} /> Avg
-        </span>
-        <span className={styles.legendItem}>
-          <span className={`${styles.swatch} ${styles.swatchMin}`} /> Min
-        </span>
-        <span className={styles.legendItem}>
-          <span className={`${styles.swatch} ${styles.swatchMax}`} /> Max
-        </span>
+        {series.map(s => (
+          <span key={s.label} className={styles.legendItem}>
+            <span className={styles.swatch} style={{
+              background: s.color,
+              opacity: (s.fillOpacity ?? 0.15) + 0.4,
+              borderColor: s.color,
+              borderStyle: s.dashed ? 'dashed' : 'solid',
+            }} />
+            {s.label}
+          </span>
+        ))}
       </div>
     </div>
   )
