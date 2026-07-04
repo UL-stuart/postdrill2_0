@@ -1,3 +1,4 @@
+import { DRILL_NAME, DRILL_DESCRIPTION } from '../../utils/drillInfo.js'
 import styles from './ReportOverview.module.css'
 
 const pad = n => String(n).padStart(2, '0')
@@ -9,7 +10,7 @@ export default function SessionMeta({ session, meta }) {
     <div className={`card ${styles.metaCard}`}>
       <dl className={styles.metaGrid}>
         {[
-          ['Drill', 'Snipe Hunt'],
+          ['Drill', DRILL_NAME],
           ['Player', session.playerName],
           ['Session', session.sessionId],
           ['Started', fmtDt(startTime)],
@@ -26,7 +27,7 @@ export default function SessionMeta({ session, meta }) {
       <div className={styles.drillDesc}>
         <h3 className={styles.drillDescLabel}>About this drill</h3>
         <p className={styles.drillDescText}>
-          Snipe Hunt is designed to stress your ability to reason through systemic complexity, separating misleading signals from real mechanisms, navigating coordination constraints when key people are unavailable, and synthesising information as it arrives from multiple sources under time pressure.
+          {DRILL_DESCRIPTION}
         </p>
       </div>
     </div>

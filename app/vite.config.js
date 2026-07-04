@@ -22,11 +22,26 @@ function uplabsDataPlugin() {
           const transcriptFiles = fs.readdirSync(path.join(DATA_ROOT, 'transcripts'))
             .filter(f => f.endsWith('.csv'))
 
+          // Build earliest-timestamp map from session_states.csv
+          const sessionDates = {}
+          try {
+            const statesCsv = fs.readFileSync(path.join(DATA_ROOT, 'session_states', 'session_states.csv'), 'utf8')
+            statesCsv.split('\n').slice(1).forEach(line => {
+              if (!line.trim()) return
+              const [sid, ts] = line.split(',')
+              if (!sid || !ts) return
+              const id = sid.trim().replace(/"/g, '')
+              const date = new Date(ts.trim())
+              if (!sessionDates[id] || date < sessionDates[id]) sessionDates[id] = date
+            })
+          } catch { /* session_states.csv missing — dates will be null */ }
+
           const sessions = sessionIds.map(sessionId => {
             const matches = transcriptFiles.filter(f => f.endsWith(`-${sessionId}.csv`))
             if (matches.length === 0) throw new Error(`No transcript for session ${sessionId}`)
             if (matches.length > 1) throw new Error(`Multiple transcripts for session ${sessionId}: ${matches.join(', ')}`)
-            return { sessionId, playerName: matches[0].replace(`-${sessionId}.csv`, ''), drillName: 'Snipe Hunt' }
+            const date = sessionDates[sessionId] ? sessionDates[sessionId].toISOString() : null
+            return { sessionId, playerName: matches[0].replace(`-${sessionId}.csv`, ''), drillName: 'Snipe Hunt', date }
           })
 
           res.setHeader('Content-Type', 'application/json')
