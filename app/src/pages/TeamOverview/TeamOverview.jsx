@@ -3,11 +3,12 @@ import { useSessionList } from '../../hooks/useSessionList.js'
 import { DRILL_NAME, DRILL_DESCRIPTION } from '../../utils/drillInfo.js'
 import ActivityCalendar from '../../components/ActivityCalendar/ActivityCalendar.jsx'
 import ActivityTimeline from '../../components/ActivityTimeline/ActivityTimeline.jsx'
+import SessionTable from './SessionTable.jsx'
 import LoadingSpinner from '../../components/LoadingSpinner.jsx'
 import ErrorState from '../../components/ErrorState.jsx'
 import styles from './TeamOverview.module.css'
 
-export default function TeamOverview({ onBack }) {
+export default function TeamOverview({ onBack, onSelectSession }) {
   useEffect(() => { document.title = 'Team Overview — Uptime Labs' }, [])
 
   const { sessions, error, loading } = useSessionList()
@@ -59,6 +60,11 @@ export default function TeamOverview({ onBack }) {
         <div className={`card ${styles.chartCard}`}>
           <h2 className={styles.chartTitle}>Activity — Timeline</h2>
           <ActivityTimeline sessions={uniqueSessions} start={timelineStart} end={timelineEnd} />
+        </div>
+
+        <div className={`card ${styles.tableCard}`}>
+          <h2 className={styles.chartTitle}>Sessions</h2>
+          <SessionTable sessions={sessions} onSelectSession={onSelectSession} />
         </div>
       </div>
     </div>

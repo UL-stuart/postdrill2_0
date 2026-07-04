@@ -16,7 +16,7 @@ export default function App() {
 
   if (!currentSession) {
     if (topLevelView === 'teamOverview') {
-      return <TeamOverview onBack={() => setTopLevelView('picker')} />
+      return <TeamOverview onBack={() => setTopLevelView('picker')} onSelectSession={s => { setCurrentSession(s); setView('overview') }} />
     }
     return (
       <SessionPicker

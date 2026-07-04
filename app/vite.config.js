@@ -22,26 +22,39 @@ function uplabsDataPlugin() {
           const transcriptFiles = fs.readdirSync(path.join(DATA_ROOT, 'transcripts'))
             .filter(f => f.endsWith('.csv'))
 
-          // Build earliest-timestamp map from session_states.csv
-          const sessionDates = {}
+          // Build per-session metadata from session_states.csv
+          const sessionMeta = {}
           try {
             const statesCsv = fs.readFileSync(path.join(DATA_ROOT, 'session_states', 'session_states.csv'), 'utf8')
             statesCsv.split('\n').slice(1).forEach(line => {
               if (!line.trim()) return
-              const [sid, ts] = line.split(',')
-              if (!sid || !ts) return
-              const id = sid.trim().replace(/"/g, '')
-              const date = new Date(ts.trim())
-              if (!sessionDates[id] || date < sessionDates[id]) sessionDates[id] = date
+              const parts = line.split(',')
+              if (parts.length < 3) return
+              const id = parts[0].trim().replace(/"/g, '')
+              const ts = parts[1].trim()
+              const state = parts[2].trim().replace(/"/g, '')
+              if (!id || !ts || !state) return
+              const date = new Date(ts)
+              if (!sessionMeta[id]) sessionMeta[id] = { first: date, last: date, endState: state }
+              else {
+                if (date < sessionMeta[id].first) sessionMeta[id].first = date
+                if (date >= sessionMeta[id].last) { sessionMeta[id].last = date; sessionMeta[id].endState = state }
+              }
             })
-          } catch { /* session_states.csv missing — dates will be null */ }
+          } catch { /* session_states.csv missing — metadata will be null */ }
 
           const sessions = sessionIds.map(sessionId => {
             const matches = transcriptFiles.filter(f => f.endsWith(`-${sessionId}.csv`))
             if (matches.length === 0) throw new Error(`No transcript for session ${sessionId}`)
             if (matches.length > 1) throw new Error(`Multiple transcripts for session ${sessionId}: ${matches.join(', ')}`)
-            const date = sessionDates[sessionId] ? sessionDates[sessionId].toISOString() : null
-            return { sessionId, playerName: matches[0].replace(`-${sessionId}.csv`, ''), drillName: 'Snipe Hunt', date }
+            const meta = sessionMeta[sessionId]
+            const date = meta ? meta.first.toISOString() : null
+            const endState = meta ? meta.endState : null
+            const completed = endState === 'wrap_up'
+            const runtimeSeconds = meta && meta.first !== meta.last
+              ? Math.round((meta.last - meta.first) / 1000)
+              : null
+            return { sessionId, playerName: matches[0].replace(`-${sessionId}.csv`, ''), drillName: 'Snipe Hunt', date, endState, completed, runtimeSeconds }
           })
 
           res.setHeader('Content-Type', 'application/json')
